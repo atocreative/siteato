@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATO. — Soluções em Tecnologia Digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#00D94A;--green-dark:#00A838;
+  --black:#0F0F0F;--white:#F8F8F6;--off:#F0F0EE;
+  --yellow:#FFE500;--orange:#FF6B1A;--blue:#3B6CF0;
+  --purple:#5C3BF0;--red:#E03030;
+  --border:2.5px solid #0F0F0F;
+  --shadow:5px 5px 0 #0F0F0F;--shadow-sm:3px 3px 0 #0F0F0F;--shadow-lg:8px 8px 0 #0F0F0F;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--white);color:var(--black);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:60px;background:var(--white);border-bottom:var(--border);transform:translateY(-100%);transition:transform .45s cubic-bezier(.16,1,.3,1);}
+nav.visible{transform:translateY(0);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;}
+.nav-links{display:flex;gap:28px;list-style:none;align-items:center;}
+.nav-links a{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;transition:color .15s;}
+.nav-links a:hover{color:var(--green-dark);}
+.nav-cta{background:var(--green);color:var(--black)!important;padding:9px 20px;border:var(--border);box-shadow:var(--shadow-sm);transition:transform .1s,box-shadow .1s;}
+.nav-cta:hover{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--black)!important;}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+.nav-burger span{display:block;width:24px;height:2.5px;background:var(--black);}
+.mobile-menu{display:none;position:fixed;top:60px;left:0;right:0;z-index:199;background:var(--white);border-bottom:var(--border);padding:24px 40px;flex-direction:column;gap:20px;}
+.mobile-menu a{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:2px;}
+.mobile-menu.open{display:flex;}
+
+/* ── HERO ── */
+.hero{width:100%;min-height:100vh;background:var(--white);position:relative;overflow:hidden;border-bottom:var(--border);display:flex;flex-direction:column;}
+.hero-blob{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+.display{font-family:'Bebas Neue',sans-serif;font-size:clamp(58px,10vw,155px);line-height:.87;letter-spacing:-1px;text-transform:uppercase;user-select:none;}
+.display em{font-style:normal;-webkit-text-stroke:2.5px var(--black);color:transparent;}
+
+.hero-main{flex:1;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:80px 40px 20px;gap:0;position:relative;z-index:1;}
+.hero-left{display:flex;flex-direction:column;gap:0;border-right:var(--border);padding-right:48px;}
+.hero-left-row{border-bottom:var(--border);padding:2px 0;}
+.hero-left-row:last-child{border-bottom:none;}
+
+/* ── 3D RING ── */
+.hero-right{
+  display:flex;align-items:center;justify-content:center;
+  padding-left:48px;position:relative;
+  perspective:500px;
+  perspective-origin:50% calc(50% - 90px);
+}
+.ring-3d-wrap{
+  position:relative;
+  width:100%;height:340px;
+  transform-style:preserve-3d;
+}
+.ring-ato-text{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(68px,10vw,148px);
+  line-height:.87;letter-spacing:-1px;text-transform:uppercase;
+  white-space:nowrap;color:var(--black);
+  z-index:0;
+}
+.ring-banner{
+  position:absolute;top:50%;left:50%;
+  display:flex;
+  transform-style:preserve-3d;
+  animation:ring-spin 22s linear infinite;
+}
+@keyframes ring-spin{
+  from{transform:translate(-50%,-50%) rotateY(0deg);}
+  to{transform:translate(-50%,-50%) rotateY(-360deg);}
+}
+.ring-panel{
+  position:absolute;
+  width:55px;height:130px;
+  overflow:hidden;
+  transform:rotateY(var(--angle)) translateZ(210px);
+}
+.ring-panel::before{
+  position:absolute;
+  left:var(--left);
+  top:0;
+  content:" • TECNOLOGIA DIGITAL • CRESCIMENTO • RESULTADOS • ATO. ";
+  font-family:'Bebas Neue',sans-serif;
+  font-size:90px;
+  line-height:1.3;
+  white-space:nowrap;
+  color:var(--green);
+  letter-spacing:2px;
+}
+
+/* Hero sticker badge */
+.hero-badge-sticker{
+  position:absolute;bottom:16%;left:6%;
+  background:var(--yellow);border:var(--border);box-shadow:var(--shadow-sm);
+  padding:8px 14px;transform:rotate(-3deg);z-index:2;
+}
+.hero-badge-sticker span{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;line-height:1.6;display:block;}
+
+/* ── DECORATIVE GEO ── */
+.geo{position:absolute;pointer-events:none;user-select:none;}
+
+/* Hero bottom */
+.hero-bottom{display:flex;align-items:center;justify-content:space-between;padding:20px 40px;border-top:var(--border);gap:40px;position:relative;z-index:1;}
+.hero-tagline{font-size:13px;line-height:1.65;opacity:.6;max-width:380px;}
+.hero-cta-group{display:flex;gap:16px;flex-shrink:0;}
+.scroll-hint{position:absolute;bottom:80px;right:40px;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:.3;animation:bob 2.2s ease-in-out infinite;z-index:2;}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+.scroll-hint span{font-size:8px;font-weight:700;letter-spacing:3px;text-transform:uppercase;writing-mode:vertical-rl;}
+.scroll-arrow-vert{width:1.5px;height:36px;background:var(--black);}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;padding:13px 24px;border:var(--border);cursor:pointer;transition:transform .1s,box-shadow .1s;}
+.btn-primary{background:var(--green);box-shadow:var(--shadow);}
+.btn-primary:hover{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--black);}
+.btn-outline{background:transparent;box-shadow:var(--shadow);}
+.btn-outline:hover{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--black);}
+
+/* ── MARQUEE ── */
+.marquee-wrap{background:var(--black);border-bottom:var(--border);overflow:hidden;padding:14px 0;white-space:nowrap;}
+.marquee-track{display:inline-flex;animation:scroll 20s linear infinite;}
+.marquee-item{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--white);padding:0 40px;display:inline-flex;align-items:center;gap:40px;}
+.marquee-dot{display:inline-block;width:7px;height:7px;background:var(--green);border-radius:50%;flex-shrink:0;}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── SECTION COMMONS ── */
+.section{padding:80px 40px;}
+.section-label{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:40px;}
+.section-label::before{content:'';display:block;width:28px;height:2.5px;background:var(--green);}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,5.5vw,80px);line-height:.92;text-transform:uppercase;letter-spacing:-.5px;margin-bottom:48px;}
+
+/* ── SOLUCOES ── */
+.services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border:var(--border);}
+.service-card{padding:40px 36px;border:var(--border);cursor:pointer;position:relative;overflow:hidden;transition:background .15s;background:var(--white);}
+.service-card:hover{background:var(--green);}
+.service-card:hover .service-num,.service-card:hover .service-arrow{color:var(--black);opacity:1;transform:translate(0,0);}
+.service-card:hover .service-tag{background:var(--black);color:var(--white);}
+.service-num{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:2px;color:var(--green);margin-bottom:16px;transition:color .15s;}
+.service-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(30px,3.5vw,50px);line-height:1;text-transform:uppercase;letter-spacing:-.5px;margin-bottom:12px;}
+.service-desc{font-size:13px;line-height:1.65;opacity:.6;max-width:360px;margin-bottom:16px;}
+.service-tag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 10px;border:var(--border);background:var(--off);transition:background .15s,color .15s;}
+.service-arrow{position:absolute;bottom:28px;right:28px;font-size:28px;opacity:0;transform:translate(8px,-8px);transition:opacity .2s,transform .2s;}
+
+/* ── 5 PASSOS ── */
+.passos{background:var(--black);color:var(--white);padding:80px 40px;border-top:var(--border);border-bottom:var(--border);position:relative;overflow:hidden;}
+.passos .section-label{color:rgba(255,255,255,.4);}
+.passos .section-label::before{background:var(--green);}
+.passos-grid{display:grid;grid-template-columns:repeat(5,1fr);border:1.5px solid rgba(255,255,255,.12);}
+.passo{padding:36px 24px;border-right:1.5px solid rgba(255,255,255,.12);transition:background .2s;}
+.passo:last-child{border-right:none;}
+.passo:hover{background:rgba(0,217,74,.07);}
+.passo-num{font-family:'Bebas Neue',sans-serif;font-size:80px;line-height:1;color:var(--green);margin-bottom:16px;opacity:.85;}
+.passo-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;}
+.passo-desc{font-size:12px;line-height:1.7;opacity:.4;}
+.passos-bg{position:absolute;right:24px;bottom:-20px;font-family:'Bebas Neue',sans-serif;font-size:260px;color:var(--green);opacity:.03;line-height:1;pointer-events:none;}
+
+/* ── SOBRE ── */
+.sobre{padding:80px 40px;border-bottom:var(--border);position:relative;overflow:hidden;}
+.sobre-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.sobre-headline{font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,6vw,88px);line-height:.9;text-transform:uppercase;margin-bottom:32px;}
+.sobre-headline span{color:var(--green);}
+.sobre-body{font-size:15px;line-height:1.75;opacity:.65;margin-bottom:32px;}
+.sobre-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:var(--border);}
+.stat{padding:24px 20px;border-right:var(--border);display:flex;flex-direction:column;gap:6px;}
+.stat:last-child{border-right:none;}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:42px;color:var(--green);line-height:1;}
+.stat-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.45;}
+.sobre-right{display:flex;flex-direction:column;gap:0;border:var(--border);}
+.sobre-pill{padding:24px 28px;border-bottom:var(--border);display:flex;gap:20px;align-items:flex-start;transition:background .2s;}
+.sobre-pill:last-child{border-bottom:none;}
+.sobre-pill:hover{background:var(--off);}
+.sobre-pill-icon{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--green);line-height:1;flex-shrink:0;width:36px;}
+.sobre-pill-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:5px;}
+.sobre-pill-text{font-size:12px;opacity:.5;line-height:1.6;}
+
+/* ── CLIENTES ── */
+.clientes{background:var(--green);color:var(--black);padding:80px 40px;border-top:var(--border);border-bottom:var(--border);position:relative;overflow:hidden;}
+.clientes .section-label::before{background:var(--black);}
+.clientes-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;gap:40px;}
+.clientes-header .section-title{margin-bottom:0;}
+.clientes-sub{font-size:13px;opacity:.65;max-width:260px;line-height:1.6;flex-shrink:0;}
+.logos-carousel-wrap{overflow:hidden;border-top:var(--border);border-bottom:var(--border);margin-bottom:56px;background:var(--black);}
+.logos-track{display:flex;align-items:center;animation:logos-scroll 30s linear infinite;width:max-content;}
+.logo-item{display:flex;align-items:center;justify-content:center;padding:28px 52px;border-right:1.5px solid rgba(255,255,255,.08);font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:3px;color:rgba(255,255,255,.5);white-space:nowrap;flex-shrink:0;transition:color .2s;}
+.logo-item:hover{color:var(--white);}
+@keyframes logos-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.depo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.depo{padding:32px 28px;background:var(--white);border:var(--border);box-shadow:var(--shadow);transition:transform .15s,box-shadow .15s;}
+.depo:hover{transform:translate(-3px,-3px);box-shadow:var(--shadow-lg);}
+.depo-quote{font-family:'Bebas Neue',sans-serif;font-size:56px;color:var(--green);line-height:.8;margin-bottom:12px;}
+.depo-text{font-size:15px;line-height:1.75;opacity:.7;margin-bottom:24px;}
+.depo-line{width:28px;height:2.5px;background:var(--black);margin-bottom:14px;}
+.depo-author{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;}
+.depo-role{font-size:11px;opacity:.4;margin-top:3px;}
+
+/* ── TRABALHOS ── */
+.trabalhos{padding:80px 40px;border-bottom:var(--border);}
+.trabalhos-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;gap:40px;}
+.trabalhos-header .section-title{margin-bottom:0;}
+.work-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:0;border:var(--border);}
+.work-card{border:var(--border);cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;background:var(--off);}
+.work-card:hover .work-overlay{opacity:1;}
+.wc-1{grid-column:span 7;grid-row:span 2;}
+.wc-2{grid-column:span 5;min-height:270px;}
+.wc-3{grid-column:span 5;min-height:270px;}
+.wc-4{grid-column:span 4;min-height:240px;}
+.wc-5{grid-column:span 4;min-height:240px;}
+.wc-6{grid-column:span 4;min-height:240px;}
+.work-img{flex:1;position:relative;overflow:hidden;min-height:160px;}
+.work-img.bg-g{background:var(--green);}
+.work-img.bg-p{background:var(--purple);}
+.work-img.bg-r{background:var(--red);}
+.work-img.bg-y{background:var(--yellow);}
+.work-img.bg-k{background:var(--black);}
+.work-img.bg-o{background:#C8C5BE;}
+.work-label-top{position:absolute;top:14px;left:14px;z-index:2;background:var(--black);color:var(--white);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;}
+.work-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;opacity:.2;color:var(--black);text-align:center;padding:20px;line-height:1.8;}
+.work-ph.light{color:var(--white);}
+.work-overlay{position:absolute;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;}
+.work-overlay-text{color:var(--white);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;}
+.work-info{padding:16px 18px;background:var(--white);border-top:var(--border);}
+.work-tag{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green-dark);margin-bottom:5px;}
+.work-name{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:.5px;text-transform:uppercase;}
+.work-client{font-size:11px;opacity:.4;margin-top:2px;}
+
+/* ── EQUIPE POLAROID ── */
+.equipe{padding:80px 40px;border-bottom:var(--border);}
+.equipe-intro{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-bottom:64px;}
+.equipe-body{font-size:14px;line-height:1.75;opacity:.6;max-width:460px;}
+.crew-flex{display:flex;gap:32px;align-items:flex-start;flex-wrap:wrap;padding:20px 0 40px;}
+.polaroid{flex:1;min-width:200px;max-width:280px;background:var(--white);border:2.5px solid var(--black);box-shadow:var(--shadow-lg);padding:12px 12px 48px;position:relative;transition:box-shadow .2s;}
+.polaroid:hover{box-shadow:12px 12px 0 var(--black);}
+.polaroid:nth-child(1){transform:rotate(-2deg);margin-top:0;}
+.polaroid:nth-child(2){transform:rotate(1.5deg);margin-top:48px;}
+.polaroid:nth-child(3){transform:rotate(-1deg);margin-top:-16px;}
+.polaroid:nth-child(4){transform:rotate(2.5deg);margin-top:32px;}
+.polaroid-photo{width:100%;aspect-ratio:3/4;background:var(--off);border:1.5px solid rgba(0,0,0,.1);position:relative;overflow:hidden;}
+.polaroid-photo-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;opacity:.2;text-align:center;padding:12px;line-height:1.8;}
+.polaroid-info{position:absolute;bottom:0;left:0;right:0;padding:10px 12px 12px;}
+.crew-role-badge{display:inline-block;font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;background:var(--green);border:1.5px solid var(--black);margin-bottom:8px;}
+.crew-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;text-transform:uppercase;line-height:1;}
+.crew-title{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.4;margin-top:3px;}
+
+/* ── CONTATO ── */
+.contato{padding:80px 40px;border-bottom:var(--border);}
+.contato-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.form-field{display:flex;flex-direction:column;border:var(--border);margin-right:-2.5px;margin-bottom:-2.5px;}
+.form-field.full{grid-column:span 2;}
+.form-field label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:12px 16px 0;opacity:.4;}
+.form-field input,.form-field textarea,.form-field select{border:none;background:transparent;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:500;padding:6px 16px 14px;outline:none;resize:none;color:var(--black);}
+.form-field textarea{min-height:100px;}
+.form-submit{margin-top:2.5px;width:100%;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:16px;background:var(--green);color:var(--black);border:var(--border);cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;}
+.form-submit:hover{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--black);}
+.contato-info{display:flex;flex-direction:column;gap:0;border:var(--border);margin-top:80px;}
+.contato-info-item{padding:20px 24px;border-bottom:var(--border);}
+.contato-info-item:last-child{border-bottom:none;}
+.ci-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.4;display:block;margin-bottom:6px;}
+.ci-value{font-size:14px;font-weight:600;}
+.form-success{display:none;padding:24px;background:var(--green);border:var(--border);font-weight:700;font-size:14px;margin-top:4px;}
+
+/* ── CTA BANNER ── */
+.cta-banner{background:var(--green);padding:64px 40px;border-top:var(--border);border-bottom:var(--border);display:flex;align-items:center;justify-content:space-between;gap:40px;position:relative;overflow:hidden;}
+.cta-left{flex:1;position:relative;z-index:1;}
+.cta-text{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,72px);line-height:.92;text-transform:uppercase;margin-bottom:24px;}
+.cta-sub{font-size:14px;font-weight:500;opacity:.7;max-width:340px;line-height:1.6;margin-bottom:28px;}
+.cta-character{flex-shrink:0;position:relative;z-index:1;display:flex;align-items:flex-end;}
+.cta-character svg{width:clamp(180px,18vw,280px);height:auto;filter:drop-shadow(6px 6px 0 rgba(0,0,0,.3));}
+/* big bg letter */
+.cta-bg-letter{position:absolute;right:-20px;bottom:-40px;font-family:'Bebas Neue',sans-serif;font-size:400px;color:rgba(0,0,0,.05);line-height:1;pointer-events:none;}
+
+/* ── FOOTER ── */
+footer{background:var(--black);color:var(--white);border-top:var(--border);}
+.footer-top{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1.5px solid rgba(255,255,255,.1);}
+.footer-col{padding:52px 40px;border-right:1.5px solid rgba(255,255,255,.1);}
+.footer-col:last-child{border-right:none;}
+.footer-col-label{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:16px;}
+.footer-col-title{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;}
+.footer-col p{font-size:13px;opacity:.5;line-height:1.75;margin-bottom:6px;}
+.footer-col a{font-size:13px;color:var(--white);opacity:.65;display:block;margin-bottom:5px;transition:opacity .15s;}
+.footer-col a:hover{opacity:1;}
+.footer-email{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1.5px;color:var(--green);margin-top:14px;display:block;}
+.social-row{display:flex;gap:10px;margin-top:14px;}
+.social-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border:1.5px solid rgba(255,255,255,.2);font-size:10px;font-weight:700;letter-spacing:1px;color:var(--white);transition:background .15s,border-color .15s;cursor:pointer;}
+.social-btn:hover{background:var(--green);border-color:var(--green);color:var(--black);}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;padding:18px 40px;gap:20px;border-top:1.5px solid rgba(255,255,255,.08);}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;}
+.footer-copy{font-size:10px;opacity:.25;letter-spacing:.3px;line-height:1.7;max-width:520px;}
+.footer-holding{font-size:10px;opacity:.18;letter-spacing:.5px;}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  nav{padding:0 24px;}
+  .nav-links{display:none;}
+  .nav-burger{display:flex;}
+  .hero-main{grid-template-columns:1fr;padding:80px 24px 20px;}
+  .hero-left{border-right:none;border-bottom:var(--border);padding-right:0;padding-bottom:16px;}
+  .hero-right{padding-left:0;padding-top:24px;}
+  .ring-3d-wrap{height:260px;}
+  .hero-bottom{padding:16px 24px;flex-direction:column;align-items:flex-start;}
+  .section{padding:56px 24px;}
+  .services-grid,.sobre-inner,.contato-inner,.equipe-intro{grid-template-columns:1fr;gap:40px;}
+  .passos-grid{grid-template-columns:1fr 1fr;}
+  .depo-grid{grid-template-columns:1fr;}
+  .work-grid{grid-template-columns:1fr 1fr;}
+  .wc-1,.wc-2,.wc-3,.wc-4,.wc-5,.wc-6{grid-column:span 1;grid-row:span 1;}
+  .crew-flex{gap:20px;}
+  .footer-top{grid-template-columns:1fr;}
+  .footer-col{border-right:none;border-bottom:1.5px solid rgba(255,255,255,.1);padding:36px 24px;}
+  .footer-bottom{flex-direction:column;align-items:flex-start;padding:18px 24px;}
+  .cta-banner{flex-direction:column;align-items:flex-start;}
+  .sobre-stats{grid-template-columns:1fr 1fr 1fr;}
+  .clientes-header{flex-direction:column;align-items:flex-start;}
+}
+@media(max-width:600px){
+  .display{font-size:clamp(48px,15vw,78px);}
+  .passos-grid{grid-template-columns:1fr;}
+  .work-grid,.sobre-stats{grid-template-columns:1fr;}
+  .stat{border-right:none;border-bottom:var(--border);}
+  .stat:last-child{border-bottom:none;}
+  .form-row,.form-field.full{grid-template-columns:1fr;grid-column:span 1;}
+  .crew-flex{flex-direction:column;align-items:center;}
+  .polaroid{max-width:260px;width:100%;margin-top:0!important;}
+  .trabalhos-header{flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#">ATO.</a>
+  <ul class="nav-links">
+    <li><a href="#solucoes">Soluções</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#trabalhos">Trabalhos</a></li>
+    <li><a href="#equipe">Equipe</a></li>
+    <li><a href="#contato">Contato</a></li>
+    <li><a class="btn btn-primary nav-cta" href="#contato">Falar com a gente</a></li>
+  </ul>
+  <div class="nav-burger" id="burger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#solucoes" onclick="closeMenu()">Soluções</a>
+  <a href="#sobre" onclick="closeMenu()">Sobre</a>
+  <a href="#trabalhos" onclick="closeMenu()">Trabalhos</a>
+  <a href="#equipe" onclick="closeMenu()">Equipe</a>
+  <a href="#contato" onclick="closeMenu()">Contato</a>
+  <a class="btn btn-primary" href="#contato" onclick="closeMenu()">Falar com a gente</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+
+  <!-- Green blob background -->
+  <svg class="hero-blob" viewBox="0 0 1512 780" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path fill="#00D94A" d="M 878,0 C 855,42 818,80 828,138 C 838,198 774,238 757,307 C 742,368 758,408 744,456 C 733,496 793,526 840,522 C 874,519 912,508 946,505 L 1512,505 L 1512,0 Z"/>
+  </svg>
+
+  <!-- Geo decorative elements -->
+  <div class="geo" style="top:6%;left:2%;font-family:'Bebas Neue',sans-serif;font-size:72px;color:var(--black);opacity:.06;line-height:1;">✦</div>
+  <div class="geo" style="top:14%;left:5%;width:90px;height:90px;border:3px solid var(--black);border-radius:50%;opacity:.07;"></div>
+  <div class="geo" style="top:22%;left:4%;width:10px;height:10px;background:var(--green);border-radius:50%;"></div>
+  <div class="geo" style="top:26%;left:7%;width:7px;height:7px;background:var(--green);border-radius:50%;opacity:.5;"></div>
+  <div class="geo" style="bottom:24%;left:2%;font-size:52px;font-weight:300;color:var(--black);opacity:.08;line-height:1;">+</div>
+  <div class="geo" style="bottom:35%;left:32%;width:50px;height:50px;border:3px solid var(--black);border-radius:50%;opacity:.06;"></div>
+  <!-- triangle geo -->
+  <div class="geo" style="top:10%;right:2%;opacity:.9;">
+    <svg width="48" height="48" viewBox="0 0 48 48"><polygon points="24,4 44,44 4,44" fill="none" stroke="#0F0F0F" stroke-width="3" opacity=".1"/></svg>
+  </div>
+
+  <!-- Hero main split -->
+  <div class="hero-main">
+    <!-- Left: stacked text -->
+    <div class="hero-left" style="opacity: 1">
+      <div class="hero-left-row"><span class="display">DIGITAL</span></div>
+      <div class="hero-left-row"><span class="display">QUE</span></div>
+      <div class="hero-left-row"><span class="display"><em>CONVERTE</em></span></div>
+      <div class="hero-left-row" style="border-bottom:none;"><span class="display">RESULTADOS.</span></div>
+    </div>
+
+    <!-- Right: 3D Ring -->
+    <div class="hero-right" style="transform: translate(4.99479px, -0.961686px); opacity: 1">
+      <div class="ring-3d-wrap">
+        <!-- ATO text sits at z=0 — 3D panels orbit around it -->
+        <div class="ring-ato-text">ATO.</div>
+        <!-- Ring banner filled by JS -->
+        <div class="ring-banner" id="ringBanner"></div>
+      </div>
+      <!-- Sticker badge -->
+      <div class="hero-badge-sticker geo" style="bottom:10%;left:8%;z-index:2;">
+        <span>Tecnologia</span>
+        <span>que vende</span>
+      </div>
+      <!-- Geo small shapes near ring -->
+      <div class="geo" style="top:8%;right:6%;width:14px;height:14px;background:var(--yellow);border:2px solid var(--black);"></div>
+      <div class="geo" style="bottom:12%;right:8%;width:8px;height:8px;background:var(--green);border-radius:50%;"></div>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="hero-bottom">
+    <p class="hero-tagline">Sistemas, sites, apps e social media com IA para clínicas, escritórios e negócios que querem crescer — convertendo digital em faturamento real.</p>
+    <div class="hero-cta-group">
+      <a class="btn btn-primary" href="#contato">Começar agora</a>
+      <a class="btn btn-outline" href="#solucoes">O que fazemos</a>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="scroll-arrow-vert"></div><span>Rolar</span></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">ATO. TECNOLOGIA DIGITAL <span class="marquee-dot"></span></span>
+    <span class="marquee-item">SISTEMAS & APPS <span class="marquee-dot"></span></span>
+    <span class="marquee-item">SOCIAL MEDIA COM IA <span class="marquee-dot"></span></span>
+    <span class="marquee-item">SITES QUE VENDEM <span class="marquee-dot"></span></span>
+    <span class="marquee-item">BRASÍLIA — DF <span class="marquee-dot"></span></span>
+    <span class="marquee-item">CRESCIMENTO REAL <span class="marquee-dot"></span></span>
+    <span class="marquee-item">ATO. TECNOLOGIA DIGITAL <span class="marquee-dot"></span></span>
+    <span class="marquee-item">SISTEMAS & APPS <span class="marquee-dot"></span></span>
+    <span class="marquee-item">SOCIAL MEDIA COM IA <span class="marquee-dot"></span></span>
+    <span class="marquee-item">SITES QUE VENDEM <span class="marquee-dot"></span></span>
+    <span class="marquee-item">BRASÍLIA — DF <span class="marquee-dot"></span></span>
+    <span class="marquee-item">CRESCIMENTO REAL <span class="marquee-dot"></span></span>
+  </div>
+</div>
+
+<!-- SOLUCOES -->
+<section class="section" id="solucoes" style="position:relative;overflow:hidden;">
+  <div class="geo" style="right:-30px;bottom:-60px;font-family:'Bebas Neue',sans-serif;font-size:280px;color:var(--black);opacity:.025;line-height:1;pointer-events:none;">TECH</div>
+  <!-- geo shapes -->
+  <div class="geo" style="top:40px;right:60px;width:60px;height:60px;border:3px solid var(--green);border-radius:50%;opacity:.2;"></div>
+  <div class="geo" style="top:56px;right:52px;width:44px;height:44px;border:3px solid var(--green);border-radius:50%;opacity:.1;"></div>
+  <div class="section-label">O que entregamos</div>
+  <h2 class="section-title">NOSSAS<br>SOLUÇÕES</h2>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-num">01</div>
+      <div class="service-name">Social Media</div>
+      <p class="service-desc">Gestão semi-automatizada com IA. Um especialista configura estratégia e conteúdo — a IA executa com consistência. Posts programados, copy gerada, publicação automática. Presença constante sem equipe full-time.</p>
+      <span class="service-tag">IA + Estratégia Humana</span>
+      <span class="service-arrow">↗</span>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">02</div>
+      <div class="service-name">Sistemas</div>
+      <p class="service-desc">Sistemas web sob medida para automatizar processos, integrar operações e escalar seu negócio. Do ERP ao CRM, do agendamento ao controle financeiro — tecnologia que trabalha enquanto você foca no que importa.</p>
+      <span class="service-tag">Web + Desktop + Mobile</span>
+      <span class="service-arrow">↗</span>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">03</div>
+      <div class="service-name">Sites</div>
+      <p class="service-desc">Sites e landing pages estratégicos: design com personalidade, copy que converte e performance que coloca você à frente. Pensado para gerar contato, agendamento e venda. Do zero ou modernizando o que você já tem.</p>
+      <span class="service-tag">Design + Performance</span>
+      <span class="service-arrow">↗</span>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">04</div>
+      <div class="service-name">Apps</div>
+      <p class="service-desc">Aplicações mobile e web para negócios em transição digital. Do protótipo ao deploy na App Store e Google Play. Apps que mantêm seus clientes conectados, automatizam atendimento e criam novos canais de receita.</p>
+      <span class="service-tag">iOS + Android + Web</span>
+      <span class="service-arrow">↗</span>
+    </div>
+  </div>
+</section>
+
+<!-- 5 PASSOS -->
+<section class="passos" id="passos">
+  <div class="passos-bg">5</div>
+  <div class="section-label">Nosso processo</div>
+  <h2 class="section-title" style="color:var(--white);">OS 5 PASSOS<br>PARA O SUCESSO</h2>
+  <div class="passos-grid">
+    <div class="passo reveal"><div class="passo-num">01</div><div class="passo-title">Conversamos</div><p class="passo-desc">Entendemos seu negócio, público e objetivo. Sem pitch, sem enrolação — uma conversa honesta sobre o que faz sentido pra você.</p></div>
+    <div class="passo reveal"><div class="passo-num">02</div><div class="passo-title">Fechamos o Contrato</div><p class="passo-desc">Escopo claro, prazo definido, investimento transparente. Nenhuma surpresa — você sabe exatamente o que está contratando.</p></div>
+    <div class="passo reveal"><div class="passo-num">03</div><div class="passo-title">Pré-visualização</div><p class="passo-desc">Antes de executar, você vê. Apresentamos design, fluxo e conteúdo completos para garantir alinhamento total.</p></div>
+    <div class="passo reveal"><div class="passo-num">04</div><div class="passo-title">Aprovação</div><p class="passo-desc">Nada sai sem seu aval. Cada detalhe revisado e aprovado por você antes de ir ao ar. Seu projeto, suas regras.</p></div>
+    <div class="passo reveal"><div class="passo-num">05</div><div class="passo-title">Negócio no ar</div><p class="passo-desc">100% funcionando, crescendo e convertendo. Acompanhamos os resultados e evoluímos junto com você.</p></div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section class="sobre section" id="sobre">
+  <!-- geo shapes -->
+  <div class="geo" style="top:48px;right:48px;width:180px;height:180px;border:3px dashed var(--black);border-radius:50%;opacity:.05;"></div>
+  <div class="geo" style="bottom:48px;right:100px;width:64px;height:64px;background:var(--yellow);border:var(--border);opacity:.2;transform:rotate(14deg);"></div>
+  <div class="geo" style="bottom:60px;left:44%;"><svg width="40" height="40" viewBox="0 0 40 40"><polygon points="20,2 38,38 2,38" fill="none" stroke="#0F0F0F" stroke-width="2.5" opacity=".1"/></svg></div>
+  <div class="sobre-inner">
+    <div>
+      <div class="section-label">Sobre nós</div>
+      <h2 class="sobre-headline">SOMOS A<br><span>ATO.</span><br>SOLUÇÕES<br>DIGITAIS.</h2>
+      <p class="sobre-body">Nascemos em Brasília com uma missão clara: tirar negócios do lugar e colocá-los no digital de um jeito que faz sentido — estratégico, humano e que vende.<br><br>Não somos uma agência. Somos uma empresa de tecnologia que entende de negócio. Desenvolvemos sistemas, sites, apps e soluções de social media para clínicas, escritórios de advocacia, vinícolas e empresas que precisam crescer.</p>
+      <div class="sobre-stats">
+        <div class="stat reveal"><span class="stat-num">50+</span><span class="stat-label">Projetos entregues</span></div>
+        <div class="stat reveal"><span class="stat-num">3x</span><span class="stat-label">Crescimento médio</span></div>
+        <div class="stat reveal"><span class="stat-num">100%</span><span class="stat-label">Foco em resultado</span></div>
+      </div>
+    </div>
+    <div class="sobre-right reveal">
+      <div class="sobre-pill"><div class="sobre-pill-icon">01</div><div><div class="sobre-pill-title">Estratégia antes de tudo</div><p class="sobre-pill-text">Antes de qualquer linha de código, entendemos seu negócio. Estratégia não é extra — é o ponto de partida.</p></div></div>
+      <div class="sobre-pill"><div class="sobre-pill-icon">02</div><div><div class="sobre-pill-title">Tecnologia com propósito</div><p class="sobre-pill-text">Desenvolvemos com qualidade, sempre pensando no resultado do seu negócio. Tecnologia que faz sentido.</p></div></div>
+      <div class="sobre-pill"><div class="sobre-pill-icon">03</div><div><div class="sobre-pill-title">Resultado no caixa</div><p class="sobre-pill-text">Não medimos sucesso por curtida. Medimos por agendamento, ligação, venda fechada. Crescimento real.</p></div></div>
+      <div class="sobre-pill"><div class="sobre-pill-icon">04</div><div><div class="sobre-pill-title">Parceria de longo prazo</div><p class="sobre-pill-text">Não somos fornecedor — somos parceiros. Acompanhamos e crescemos junto com o seu negócio.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTES -->
+<section class="clientes" id="clientes">
+  <!-- geo -->
+  <div class="geo" style="top:40px;right:40px;font-family:'Bebas Neue',sans-serif;font-size:120px;color:rgba(0,0,0,.06);line-height:1;pointer-events:none;">✦</div>
+  <div class="clientes-header">
+    <div>
+      <div class="section-label">Quem confia na ATO.</div>
+      <h2 class="section-title">NOSSOS<br>CLIENTES</h2>
+    </div>
+    <p class="clientes-sub">Clínicas, escritórios de advocacia, vinícolas e negócios que crescem no digital com resultado de verdade.</p>
+  </div>
+  <div class="logos-carousel-wrap">
+    <div class="logos-track" id="logosTrack">
+      <div class="logo-item">CLÍNICA DR. SILVA</div><div class="logo-item">ADVOCACIA LEMOS</div><div class="logo-item">VINÍCOLA PLANALTO</div><div class="logo-item">INSTITUTO SAÚDE+</div><div class="logo-item">ESCRITÓRIO RAMOS</div><div class="logo-item">CLÍNICA ESTÉTICA</div><div class="logo-item">VINI BRASILIANA</div><div class="logo-item">ADVOCACIA PLURAL</div>
+      <div class="logo-item">CLÍNICA DR. SILVA</div><div class="logo-item">ADVOCACIA LEMOS</div><div class="logo-item">VINÍCOLA PLANALTO</div><div class="logo-item">INSTITUTO SAÚDE+</div><div class="logo-item">ESCRITÓRIO RAMOS</div><div class="logo-item">CLÍNICA ESTÉTICA</div><div class="logo-item">VINI BRASILIANA</div><div class="logo-item">ADVOCACIA PLURAL</div>
+    </div>
+  </div>
+  <div class="depo-grid">
+    <div class="depo reveal"><div class="depo-quote">"</div><p class="depo-text">A ATO. transformou nossa presença digital. Em 4 meses, triplicamos agendamentos online. Profissionalismo e criatividade que raramente vê juntos — e que apareceu direto no faturamento.</p><div class="depo-line"></div><div class="depo-author">Dra. Ana Beatriz</div><div class="depo-role">Clínica Dermatológica — Brasília, DF</div></div>
+    <div class="depo reveal"><div class="depo-quote">"</div><p class="depo-text">Queríamos modernizar o escritório sem perder credibilidade. A ATO. entregou um site e redes que nos representam de verdade. Os novos clientes chegam perguntando pelo digital.</p><div class="depo-line"></div><div class="depo-author">Dr. Marcos Lemos</div><div class="depo-role">Advocacia Lemos & Associados — DF</div></div>
+    <div class="depo reveal"><div class="depo-quote">"</div><p class="depo-text">Trabalhar com a ATO. é diferente. Eles não vendem pacote, vendem solução. O sistema que desenvolveram otimizou nossa operação e abriu canais de venda que nem imaginávamos.</p><div class="depo-line"></div><div class="depo-author">Rafael Guimarães</div><div class="depo-role">Vinícola Planalto Central — DF</div></div>
+  </div>
+</section>
+
+<!-- TRABALHOS -->
+<section class="trabalhos" id="trabalhos">
+  <div class="trabalhos-header">
+    <div><div class="section-label">Portfólio</div><h2 class="section-title">NOSSOS<br>TRABALHOS</h2></div>
+    <a class="btn btn-outline" href="#contato">Quero o meu</a>
+  </div>
+  <!-- geo -->
+  <div class="geo" style="right:40px;top:40px;width:48px;height:48px;background:var(--yellow);border:var(--border);transform:rotate(8deg);opacity:.7;"></div>
+  <div class="work-grid">
+    <div class="work-card wc-1 reveal"><div class="work-img bg-g" style="flex:1;min-height:360px;"><div class="work-label-top">SITE + SOCIAL MEDIA IA</div><div class="work-ph">imagem do projeto<br>clínica dr. silva</div><div class="work-overlay"><span class="work-overlay-text">Ver projeto</span></div></div><div class="work-info"><div class="work-tag">Site & Social Media com IA</div><div class="work-name">Clínica Dr. Silva</div><div class="work-client">Clínica Médica — Brasília, DF</div></div></div>
+    <div class="work-card wc-2 reveal"><div class="work-img bg-p" style="flex:1;"><div class="work-label-top">SISTEMA WEB</div><div class="work-ph light">sistema de gestão<br>advocacia plural</div><div class="work-overlay"><span class="work-overlay-text">Ver projeto</span></div></div><div class="work-info"><div class="work-tag">Sistema Web</div><div class="work-name">Advocacia Plural</div><div class="work-client">Escritório — DF</div></div></div>
+    <div class="work-card wc-3 reveal"><div class="work-img bg-y" style="flex:1;"><div class="work-label-top">APP MOBILE</div><div class="work-ph">app de agendamento<br>instituto saúde+</div><div class="work-overlay"><span class="work-overlay-text">Ver projeto</span></div></div><div class="work-info"><div class="work-tag">App Mobile</div><div class="work-name">Instituto Saúde+</div><div class="work-client">Saúde — Brasília, DF</div></div></div>
+    <div class="work-card wc-4 reveal"><div class="work-img bg-k" style="flex:1;"><div class="work-label-top">BRANDING + SITE</div><div class="work-ph light">site vinícola<br>planalto central</div><div class="work-overlay"><span class="work-overlay-text">Ver projeto</span></div></div><div class="work-info"><div class="work-tag">Branding & Site</div><div class="work-name">Vinícola Planalto</div><div class="work-client">Vinícola — DF</div></div></div>
+    <div class="work-card wc-5 reveal"><div class="work-img bg-r" style="flex:1;"><div class="work-label-top">SOCIAL MEDIA IA</div><div class="work-ph light">social media ia<br>advocacia lemos</div><div class="work-overlay"><span class="work-overlay-text">Ver projeto</span></div></div><div class="work-info"><div class="work-tag">Social Media com IA</div><div class="work-name">Advocacia Lemos</div><div class="work-client">Escritório — DF</div></div></div>
+    <div class="work-card wc-6 reveal"><div class="work-img bg-o" style="flex:1;"><div class="work-label-top">SISTEMA + APP</div><div class="work-ph">plataforma clínica<br>estética avançada</div><div class="work-overlay"><span class="work-overlay-text">Ver projeto</span></div></div><div class="work-info"><div class="work-tag">Sistema & App</div><div class="work-name">Clínica Estética</div><div class="work-client">Estética Avançada — DF</div></div></div>
+  </div>
+</section>
+
+<!-- EQUIPE -->
+<section class="equipe section" id="equipe">
+  <!-- geo -->
+  <div class="geo" style="bottom:20px;left:40px;font-family:'Bebas Neue',sans-serif;font-size:160px;color:var(--black);opacity:.03;line-height:1;pointer-events:none;">CREW</div>
+  <div class="equipe-intro">
+    <div><div class="section-label">Quem somos</div><h2 class="section-title">A EQUIPE<br>POR TRÁS<br>DA ATO.</h2></div>
+    <p class="equipe-body" style="padding-top:80px;">A operação ATO. é feita por especialistas que entendem de negócios tradicionais em transição digital. Sem jargão, sem filosofia divorciada da realidade de vendas e operação.<br><br>Sprints curtos, feedback contínuo e documentação viva. Ao fim de cada ciclo, você sabe exatamente o que foi entregue e por quê.</p>
+  </div>
+  <div class="crew-flex">
+    <div class="polaroid reveal"><div class="polaroid-photo"><div class="polaroid-photo-ph">foto do CEO<br>[retrato profissional]</div></div><div class="polaroid-info"><span class="crew-role-badge">CEO</span><div class="crew-name">Nome do CEO</div><div class="crew-title">Strategy + Operations</div></div></div>
+    <div class="polaroid reveal"><div class="polaroid-photo"><div class="polaroid-photo-ph">foto do CCO<br>[retrato profissional]</div></div><div class="polaroid-info"><span class="crew-role-badge">CCO</span><div class="crew-name">Nome do CCO</div><div class="crew-title">Creative + Content</div></div></div>
+    <div class="polaroid reveal"><div class="polaroid-photo"><div class="polaroid-photo-ph">foto do CTO<br>[retrato profissional]</div></div><div class="polaroid-info"><span class="crew-role-badge">CTO</span><div class="crew-name">Nome do CTO</div><div class="crew-title">Backend + Infrastructure</div></div></div>
+    <div class="polaroid reveal"><div class="polaroid-photo"><div class="polaroid-photo-ph">foto do CMO<br>[retrato profissional]</div></div><div class="polaroid-info"><span class="crew-role-badge">CMO</span><div class="crew-name">Nome do CMO</div><div class="crew-title">Growth + Analytics</div></div></div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section class="contato" id="contato">
+  <div class="contato-inner">
+    <div>
+      <div class="section-label">Bora conversar?</div>
+      <h2 class="section-title">TRANSFORME<br>SEU NEGÓCIO<br>AGORA.</h2>
+      <p style="font-size:14px;line-height:1.7;opacity:.55;margin-bottom:40px;">Conta pra gente sobre seu projeto. Sem enrolação — uma conversa honesta sobre onde você quer chegar e como a ATO. te leva até lá.</p>
+      <div class="contato-info">
+        <div class="contato-info-item"><span class="ci-label">E-mail</span><span class="ci-value">contato@4pcapital.com.br</span></div>
+        <div class="contato-info-item"><span class="ci-label">Endereço</span><span class="ci-value" style="font-size:12px;font-weight:500;line-height:1.7;">Setor de Autarquias Sul Q. 4 Bloco A<br>Edifício Victória Office Tower, 6º andar<br>Asa Sul, Brasília — DF</span></div>
+        <div class="contato-info-item"><span class="ci-label">Redes</span><div style="display:flex;gap:10px;margin-top:4px;"><a class="social-btn" href="#" style="border:var(--border);color:var(--black);">IG</a><a class="social-btn" href="#" style="border:var(--border);color:var(--black);">LI</a><a class="social-btn" href="#" style="border:var(--border);color:var(--black);">WA</a></div></div>
+      </div>
+    </div>
+    <div>
+      <form id="contactForm" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-field"><label>Nome</label><input type="text" placeholder="Seu nome completo" required></div>
+          <div class="form-field"><label>Empresa</label><input type="text" placeholder="Nome da empresa"></div>
+          <div class="form-field"><label>E-mail</label><input type="email" placeholder="seu@email.com" required></div>
+          <div class="form-field"><label>Telefone / WhatsApp</label><input type="tel" placeholder="(61) 9 9999-9999"></div>
+          <div class="form-field full"><label>O que você precisa?</label><select><option value="">Selecione o serviço...</option><option>Site</option><option>Social Media com IA</option><option>Sistema Web</option><option>App Mobile</option><option>Tudo junto</option><option>Diagnóstico gratuito</option></select></div>
+          <div class="form-field full"><label>Conta mais sobre seu negócio</label><textarea placeholder="Qual seu negócio, o que precisa, onde quer chegar..."></textarea></div>
+        </div>
+        <button type="submit" class="form-submit">Enviar — Vamos conversar</button>
+        <div class="form-success" id="formSuccess">Mensagem enviada! Retornamos em até 24h.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER com personagem -->
+<section class="cta-banner">
+  <div class="cta-bg-letter">→</div>
+  <div class="cta-left">
+    <div class="cta-text">PRONTO PARA<br>CRESCER<br>NO DIGITAL?</div>
+    <p class="cta-sub">Não espera o concorrente chegar na frente. Faz acontecer agora com a ATO.</p>
+    <a class="btn btn-outline" href="#contato" style="background:var(--black);color:var(--white);box-shadow:5px 5px 0 rgba(0,0,0,.25);">Falar com a gente</a>
+  </div>
+  <!-- Phone mascot character -->
+  <div class="cta-character">
+    <svg viewBox="0 0 260 380" xmlns="http://www.w3.org/2000/svg" aria-label="Personagem mascote ATO.">
+      <!-- Left arm -->
+      <line x1="64" y1="148" x2="14" y2="108" stroke="#D4B49A" stroke-width="22" stroke-linecap="round"/>
+      <!-- Left glove -->
+      <ellipse cx="10" cy="100" rx="26" ry="22" fill="white" stroke="#1A1A1A" stroke-width="3.5"/>
+      <line x1="-2" y1="86" x2="6" y2="76" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+      <line x1="8" y1="82" x2="14" y2="70" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+      <line x1="18" y1="80" x2="22" y2="68" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+      <line x1="28" y1="82" x2="30" y2="72" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+      <!-- Right arm -->
+      <line x1="196" y1="148" x2="246" y2="108" stroke="#D4B49A" stroke-width="22" stroke-linecap="round"/>
+      <!-- Right glove -->
+      <ellipse cx="250" cy="100" rx="26" ry="22" fill="white" stroke="#1A1A1A" stroke-width="3.5"/>
+      <line x1="262" y1="86" x2="254" y2="76" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+      <line x1="252" y1="82" x2="246" y2="70" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+      <line x1="242" y1="80" x2="238" y2="68" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+      <line x1="232" y1="82" x2="230" y2="72" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+      <!-- Left leg -->
+      <rect x="88" y="268" width="22" height="72" rx="11" fill="#D4B49A" stroke="#1A1A1A" stroke-width="3.5"/>
+      <!-- Right leg -->
+      <rect x="150" y="268" width="22" height="72" rx="11" fill="#D4B49A" stroke="#1A1A1A" stroke-width="3.5"/>
+      <!-- Left shoe -->
+      <ellipse cx="94" cy="344" rx="36" ry="16" fill="white" stroke="#1A1A1A" stroke-width="3.5"/>
+      <ellipse cx="90" cy="342" rx="28" ry="11" fill="#FF6B1A" stroke="#1A1A1A" stroke-width="2.5"/>
+      <line x1="76" y1="338" x2="104" y2="334" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="78" y1="343" x2="100" y2="340" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      <!-- Right shoe -->
+      <ellipse cx="166" cy="344" rx="36" ry="16" fill="white" stroke="#1A1A1A" stroke-width="3.5"/>
+      <ellipse cx="170" cy="342" rx="28" ry="11" fill="#FF6B1A" stroke="#1A1A1A" stroke-width="2.5"/>
+      <line x1="156" y1="338" x2="184" y2="334" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="158" y1="343" x2="180" y2="340" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      <!-- Phone frame (blue) -->
+      <rect x="48" y="28" width="164" height="248" rx="28" fill="#3B6CF0" stroke="#1A1A1A" stroke-width="5"/>
+      <!-- Phone screen (orange) -->
+      <rect x="62" y="42" width="136" height="220" rx="18" fill="#FF6B1A" stroke="#1A1A1A" stroke-width="3.5"/>
+      <!-- Left eyebrow -->
+      <path d="M 88 122 Q 108 110 122 120" stroke="#1A1A1A" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <!-- Right eyebrow -->
+      <path d="M 138 120 Q 152 110 170 122" stroke="#1A1A1A" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <!-- Left eye white -->
+      <ellipse cx="108" cy="148" rx="22" ry="26" fill="white" stroke="#1A1A1A" stroke-width="4"/>
+      <!-- Right eye white -->
+      <ellipse cx="152" cy="148" rx="22" ry="26" fill="white" stroke="#1A1A1A" stroke-width="4"/>
+      <!-- Left pupil -->
+      <circle cx="112" cy="152" r="13" fill="#1A1A1A"/>
+      <circle cx="116" cy="146" r="4" fill="white"/>
+      <!-- Right pupil -->
+      <circle cx="156" cy="152" r="13" fill="#1A1A1A"/>
+      <circle cx="160" cy="146" r="4" fill="white"/>
+      <!-- Cheek blush left -->
+      <ellipse cx="84" cy="172" rx="12" ry="8" fill="#FF6B1A" opacity=".35"/>
+      <!-- Cheek blush right -->
+      <ellipse cx="176" cy="172" rx="12" ry="8" fill="#FF6B1A" opacity=".35"/>
+      <!-- Smile -->
+      <path d="M 96 196 Q 130 226 164 196" stroke="#1A1A1A" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+    </svg>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-col">
+      <div class="footer-col-label">Conecte-se</div>
+      <div class="footer-col-title">Vamos conversar</div>
+      <p>Estamos ansiosos para te ouvir. Venha compartilhar suas ideias, perguntas ou projetos. Estamos aqui para transformar suas visões em realidade.</p>
+      <a class="footer-email" href="mailto:contato@4pcapital.com.br">contato@4pcapital.com.br</a>
+      <div class="social-row">
+        <a class="social-btn" href="#">IG</a>
+        <a class="social-btn" href="#">LI</a>
+        <a class="social-btn" href="#">WA</a>
+        <a class="social-btn" href="#">YT</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-label">Trabalhe conosco</div>
+      <div class="footer-col-title">Faça parte</div>
+      <p>Buscamos talentos que pensam fora da caixa. Se você tem atitude, criatividade e gosta de resultado, queremos te conhecer.</p>
+      <a class="btn btn-primary" href="mailto:contato@4pcapital.com.br" style="margin-top:20px;display:inline-flex;">Manda seu portfólio</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-label">Visite-nos</div>
+      <div class="footer-col-title">Nos encontre</div>
+      <p>Encontre-nos no coração da Asa Sul, Brasília. Estamos prontos para recebê-lo onde a inovação se encontra com a tradição.</p>
+      <p style="margin-top:16px;font-size:11px;opacity:.3;line-height:1.9;">Setor de Autarquias Sul Q. 4 Bloco A<br>Edifício Victória Office Tower, 6º andar<br>Asa Sul, Brasília — DF, 70070-938</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-logo">ATO.</span>
+    <span class="footer-copy">© 2025 4P Capital Investiment Holding. Todos os direitos reservados. ATO. e suas marcas são registradas de 4P Capital, ou de suas subsidiárias. Quaisquer outras marcas são de propriedade de seus respectivos titulares.</span>
+    <span class="footer-holding">4P CAPITAL</span>
+  </div>
+</footer>
+
+<script>
+// ── NAV ──
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('visible', window.scrollY > window.innerHeight*.7);
+});
+function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
+function closeMenu(){document.getElementById('mobileMenu').classList.remove('open');}
+
+// ── FORM ──
+function handleSubmit(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('.form-submit');
+  btn.textContent='Enviando...';btn.disabled=true;
+  setTimeout(()=>{
+    document.getElementById('formSuccess').style.display='block';
+    btn.style.display='none';
+    e.target.querySelectorAll('input,textarea,select').forEach(el=>{el.value='';el.disabled=true;});
+  },900);
+}
+
+// ── 3D RING (adapted from CSS cylinder technique) ──
+(function initRing(){
+  const NUM = 24;
+  const PANEL_W = 55;
+  const RADIUS = 210;
+  const TEXT = ' • TECNOLOGIA DIGITAL • CRESCIMENTO • RESULTADOS • ATO. ';
+  const banner = document.getElementById('ringBanner');
+  if(!banner) return;
+
+  for(let i = 0; i < NUM; i++){
+    const p = document.createElement('div');
+    p.className = 'ring-panel';
+    p.style.setProperty('--angle', (360 / NUM * i) + 'deg');
+    p.style.setProperty('--left', (PANEL_W * i * -1) + 'px');
+    banner.appendChild(p);
+  }
+})();
+
+// ── SCROLL REVEAL ──
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// ── HERO PARALLAX ON RING ──
+const heroRight = document.querySelector('.hero-right');
+window.addEventListener('mousemove',e=>{
+  if(!heroRight)return;
+  const x=(e.clientX/window.innerWidth-.5)*10;
+  const y=(e.clientY/window.innerHeight-.5)*6;
+  heroRight.style.transform=`translate(${x}px,${y}px)`;
+});
+</script>
+</body>
+</html>
