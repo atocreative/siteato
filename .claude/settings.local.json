@@ -1,6 +1,64 @@
 {
-  "enabledMcpjsonServers": [
-    "context7"
-  ],
-  "enableAllProjectMcpServers": true
+  "permissions": {
+    "allow": [
+      "Bash(npx tsx:*)",
+      "Bash(npx tsc:*)",
+      "Bash(ls C:/Users/Administrador/guimi-os/app/*.tsx)",
+      "Bash(npm run:*)",
+      "Bash(echo \"dev started, pid=$!\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/api/tarefas)",
+      "Bash(curl -s http://localhost:3000/api/auth/csrf)",
+      "Bash(node -e ':*)",
+      "Bash(kill 553)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(echo \"pid=$!\")",
+      "Bash(taskkill /PID 18184 /F)",
+      "Bash(kill 624)",
+      "Bash(cmd /c \"taskkill /PID 18184 /F\")",
+      "Bash(curl:*)",
+      "Bash(xargs grep:*)",
+      "Bash(npx next:*)",
+      "Bash(node -e \"const { PrismaClient } = require\\('@prisma/client'\\); console.log\\(Object.getOwnPropertyNames\\(PrismaClient.prototype\\).slice\\(0,20\\)\\)\")",
+      "Bash(node -e \"const { PrismaClient } = require\\('@prisma/client'\\); const p = new PrismaClient\\({ datasourceUrl: process.env.DIRECT_URL || process.env.DATABASE_URL }\\); console.log\\('OK'\\)\")",
+      "Bash(node:*)",
+      "Bash(taskkill /PID 2520 /F)",
+      "Bash(npx prisma *)",
+      "Bash(DATABASE_URL=\"postgresql://postgres.szliprsecsrbrxxzaemt:IBSiv7fHDPrxfel9@aws-1-us-west-2.pooler.supabase.com:5432/postgres\" npx prisma *)",
+      "Bash(grep -E \"\\\\.tsx$\")",
+      "Bash(grep -v \"^\\\\s*//\")",
+      "Bash(find /c/Users/Administrador/guimi-os/components -name \"*.tsx\" -exec grep -l \"use client\" {} \\\\;)",
+      "Bash(xargs wc *)",
+      "mcp__serena__initial_instructions",
+      "mcp__serena__check_onboarding_performed",
+      "Skill(gsd-new-project)",
+      "mcp__serena__activate_project",
+      "mcp__filesystem__create_directory",
+      "mcp__filesystem__directory_tree",
+      "Bash(npm install *)",
+      "mcp__serena__replace_content",
+      "Bash(pkill -f \"npm run dev\")",
+      "mcp__serena__get_symbols_overview",
+      "mcp__filesystem__read_text_file",
+      "mcp__filesystem__edit_file",
+      "Bash(pkill -f \"vite\")",
+      "Bash(netstat -tuln)",
+      "Bash(dir \"C:\\\\Users\\\\Administrador\\\\websiteato\\\\src\")",
+      "Bash(taskkill /F /IM node.exe)",
+      "Bash(netstat -ano)",
+      "Bash(tasklist /FI 'PID eq __TRACKED_VAR__')",
+      "PowerShell(Stop-Process *)",
+      "PowerShell(Get-Process *)",
+      "PowerShell(Get-NetTCPConnection *)",
+      "PowerShell(npm run *)",
+      "PowerShell(netstat *)"
+    ],
+    "deny": []
+  },
+  "agentRouting": {
+    "Plan": "Google Gemini",
+    "Explore": "Google Gemini",
+    "general-purpose": "Codex OAuth",
+    "coding": "Claude CLI",
+    "default": "Claude CLI"
+  }
 }

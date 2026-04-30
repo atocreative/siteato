@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  @apply font-sans;
+}
+
+/* Animações para o Background Espacial da Hero */
+@keyframes twinkle-drift-1 {
+  0% { opacity: 0; transform: translateY(0) rotate(0deg); }
+  10% { opacity: 0.8; }
+  50% { opacity: 0.3; transform: translateY(-30px) rotate(5deg); }
+  80% { opacity: 0.9; }
+  100% { opacity: 0; transform: translateY(-50px) rotate(-5deg); filter: blur(0.5px); }
+}
+
+@keyframes glow-gravitational-2 {
+  0% { opacity: 0; transform: translate(0, 0); }
+  20% { opacity: 0.9; }
+  50% { opacity: 0.5; transform: translate(20px, 15px) rotate(-3deg); filter: blur(1px); }
+  80% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-10px, -20px) rotate(3deg); filter: blur(0px); }
+}
+
+/* Container padrão ATO — centraliza conteúdo em max 1200px */
+.ato-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .ato-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}

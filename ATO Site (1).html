@@ -23,6 +23,7 @@ a{text-decoration:none;color:inherit;}
 /* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:60px;background:var(--white);border-bottom:var(--border);transform:translateY(-100%);transition:transform .45s cubic-bezier(.16,1,.3,1);}
 nav.visible{transform:translateY(0);}
+nav.floating{top:12px;left:20px;right:20px;height:60px;padding:0 28px;background:var(--black);border:2px solid rgba(255,255,255,.15);box-shadow:6px 6px 0 var(--green);border-radius:0;}
 .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;}
 .nav-links{display:flex;gap:28px;list-style:none;align-items:center;}
 .nav-links a{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;transition:color .15s;}
@@ -36,64 +37,72 @@ nav.visible{transform:translateY(0);}
 .mobile-menu.open{display:flex;}
 
 /* ── HERO ── */
-.hero{width:100%;min-height:100vh;background:var(--white);position:relative;overflow:hidden;border-bottom:var(--border);display:flex;flex-direction:column;}
-.hero-blob{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;}
-.display{font-family:'Bebas Neue',sans-serif;font-size:clamp(58px,10vw,155px);line-height:.87;letter-spacing:-1px;text-transform:uppercase;user-select:none;}
-.display em{font-style:normal;-webkit-text-stroke:2.5px var(--black);color:transparent;}
+.hero{width:100%;min-height:100vh;background:var(--black);position:relative;overflow:hidden;border-bottom:var(--border);display:flex;flex-direction:column;}
+.hero-blob{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;transform:scale(1.2);transform-origin:top right;}
+.hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 78% -8%,rgba(0,217,74,.32) 0%,transparent 50%),radial-gradient(ellipse at 15% 105%,rgba(0,217,74,.12) 0%,transparent 45%);z-index:0;pointer-events:none;}
+.display{font-family:'Bebas Neue',sans-serif;font-size:clamp(58px,10vw,155px);line-height:.87;letter-spacing:-1px;text-transform:uppercase;user-select:none;color:var(--white);}
+.display em{font-style:normal;-webkit-text-stroke:2.5px var(--white);color:transparent;}
 
 .hero-main{flex:1;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:80px 40px 20px;gap:0;position:relative;z-index:1;}
-.hero-left{display:flex;flex-direction:column;gap:0;border-right:var(--border);padding-right:48px;}
-.hero-left-row{border-bottom:var(--border);padding:2px 0;}
-.hero-left-row:last-child{border-bottom:none;}
+.hero-left{display:flex;flex-direction:column;gap:0;padding-right:48px;}
+.hero-left-row{padding:2px 0;}
 
 /* ── 3D RING ── */
 .hero-right{
   display:flex;align-items:center;justify-content:center;
   padding-left:48px;position:relative;
   perspective:500px;
-  perspective-origin:50% calc(50% - 90px);
+  perspective-origin:50% calc(50% - 150px);
 }
-.ring-3d-wrap{
+.ring-scene{
   position:relative;
-  width:100%;height:340px;
   transform-style:preserve-3d;
+  transform:rotateX(-15deg) rotateZ(-5deg);
 }
-.ring-ato-text{
-  position:absolute;top:50%;left:50%;
+.ring-planet{
+  position:absolute;
   transform:translate(-50%,-50%);
   font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(68px,10vw,148px);
-  line-height:.87;letter-spacing:-1px;text-transform:uppercase;
-  white-space:nowrap;color:var(--black);
-  z-index:0;
+  font-size:clamp(110px,16vw,220px);
+  font-weight:900;
+  color:var(--black);
+  margin:0;
+  letter-spacing:-4px;
+  white-space:nowrap;
+  z-index:2;
 }
 .ring-banner{
-  position:absolute;top:50%;left:50%;
   display:flex;
   transform-style:preserve-3d;
-  animation:ring-spin 22s linear infinite;
+  animation:ring-spin 24s linear infinite;
 }
 @keyframes ring-spin{
-  from{transform:translate(-50%,-50%) rotateY(0deg);}
-  to{transform:translate(-50%,-50%) rotateY(-360deg);}
+  to{transform:rotateY(-360deg);}
 }
 .ring-panel{
   position:absolute;
-  width:55px;height:130px;
+  transform:translate(-50%,-50%) rotateY(var(--angle)) translateZ(190px);
+  width:50px;
+  height:120px;
   overflow:hidden;
-  transform:rotateY(var(--angle)) translateZ(210px);
 }
 .ring-panel::before{
   position:absolute;
   left:var(--left);
-  top:0;
-  content:" • TECNOLOGIA DIGITAL • CRESCIMENTO • RESULTADOS • ATO. ";
+  content:attr(data-text);
+  font-size:var(--font-size,36px);
+  width:max-content;
+  color:#ffffff;
   font-family:'Bebas Neue',sans-serif;
-  font-size:90px;
-  line-height:1.3;
-  white-space:nowrap;
-  color:var(--green);
-  letter-spacing:2px;
+  font-weight:700;
+  letter-spacing:3px;
+}
+.ring-screen{
+  position:absolute;
+  width:420px;height:420px;
+  background-image:linear-gradient(90deg,rgba(0,0,0,.85),rgba(0,0,0,.2),rgba(0,0,0,.85));
+  transform:translate(-50%,-50%);
+  pointer-events:none;
 }
 
 /* Hero sticker badge */
@@ -102,26 +111,24 @@ nav.visible{transform:translateY(0);}
   background:var(--yellow);border:var(--border);box-shadow:var(--shadow-sm);
   padding:8px 14px;transform:rotate(-3deg);z-index:2;
 }
-.hero-badge-sticker span{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;line-height:1.6;display:block;}
+.hero-badge-sticker span{font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;line-height:1.5;display:block;}
 
 /* ── DECORATIVE GEO ── */
 .geo{position:absolute;pointer-events:none;user-select:none;}
 
 /* Hero bottom */
-.hero-bottom{display:flex;align-items:center;justify-content:space-between;padding:20px 40px;border-top:var(--border);gap:40px;position:relative;z-index:1;}
-.hero-tagline{font-size:13px;line-height:1.65;opacity:.6;max-width:380px;}
+.hero-bottom{display:flex;align-items:center;justify-content:space-between;padding:32px 40px 20px;gap:40px;position:relative;z-index:1;}
+.hero-tagline{font-size:13px;line-height:1.65;opacity:.55;max-width:380px;color:var(--white);}
 .hero-cta-group{display:flex;gap:16px;flex-shrink:0;}
-.scroll-hint{position:absolute;bottom:80px;right:40px;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:.3;animation:bob 2.2s ease-in-out infinite;z-index:2;}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
-.scroll-hint span{font-size:8px;font-weight:700;letter-spacing:3px;text-transform:uppercase;writing-mode:vertical-rl;}
-.scroll-arrow-vert{width:1.5px;height:36px;background:var(--black);}
+
 
 /* ── BUTTONS ── */
 .btn{display:inline-flex;align-items:center;gap:8px;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;padding:13px 24px;border:var(--border);cursor:pointer;transition:transform .1s,box-shadow .1s;}
 .btn-primary{background:var(--green);box-shadow:var(--shadow);}
 .btn-primary:hover{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--black);}
-.btn-outline{background:transparent;box-shadow:var(--shadow);}
-.btn-outline:hover{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--black);}
+.btn-outline{background:transparent;border:var(--border);box-shadow:var(--shadow);color:var(--black);}
+.btn-outline.hero-btn{border-color:rgba(255,255,255,.7);box-shadow:5px 5px 0 rgba(255,255,255,.25);color:var(--white);}
+.btn-outline.hero-btn:hover{transform:translate(3px,3px);box-shadow:2px 2px 0 rgba(255,255,255,.25);}
 
 /* ── MARQUEE ── */
 .marquee-wrap{background:var(--black);border-bottom:var(--border);overflow:hidden;padding:14px 0;white-space:nowrap;}
@@ -235,12 +242,16 @@ nav.visible{transform:translateY(0);}
 .equipe-intro{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-bottom:64px;}
 .equipe-body{font-size:14px;line-height:1.75;opacity:.6;max-width:460px;}
 .crew-flex{display:flex;gap:32px;align-items:flex-start;flex-wrap:wrap;padding:20px 0 40px;}
-.polaroid{flex:1;min-width:200px;max-width:280px;background:var(--white);border:2.5px solid var(--black);box-shadow:var(--shadow-lg);padding:12px 12px 48px;position:relative;transition:box-shadow .2s;}
-.polaroid:hover{box-shadow:12px 12px 0 var(--black);}
+.polaroid{flex:1;min-width:200px;max-width:280px;background:var(--white);border:2.5px solid var(--black);box-shadow:var(--shadow-lg);padding:12px 12px 48px;position:relative;transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s;}
 .polaroid:nth-child(1){transform:rotate(-2deg);margin-top:0;}
 .polaroid:nth-child(2){transform:rotate(1.5deg);margin-top:48px;}
 .polaroid:nth-child(3){transform:rotate(-1deg);margin-top:-16px;}
 .polaroid:nth-child(4){transform:rotate(2.5deg);margin-top:32px;}
+.polaroid:hover{box-shadow:14px 14px 0 var(--black);}
+.polaroid:nth-child(1):hover{transform:rotate(-7deg) translateY(-10px) scale(1.05);}
+.polaroid:nth-child(2):hover{transform:rotate(6deg) translateY(-10px) scale(1.05);}
+.polaroid:nth-child(3):hover{transform:rotate(-6deg) translateY(-10px) scale(1.05);}
+.polaroid:nth-child(4):hover{transform:rotate(7deg) translateY(-10px) scale(1.05);}
 .polaroid-photo{width:100%;aspect-ratio:3/4;background:var(--off);border:1.5px solid rgba(0,0,0,.1);position:relative;overflow:hidden;}
 .polaroid-photo-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;opacity:.2;text-align:center;padding:12px;line-height:1.8;}
 .polaroid-info{position:absolute;bottom:0;left:0;right:0;padding:10px 12px 12px;}
@@ -295,9 +306,8 @@ footer{background:var(--black);color:var(--white);border-top:var(--border);}
 .footer-copy{font-size:10px;opacity:.25;letter-spacing:.3px;line-height:1.7;max-width:520px;}
 .footer-holding{font-size:10px;opacity:.18;letter-spacing:.5px;}
 
-/* ── REVEAL ── */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease;}
-.reveal.in{opacity:1;transform:translateY(0);}
+/* reveal: always visible */
+.reveal{opacity:1;transform:none;}
 
 /* ── RESPONSIVE ── */
 @media(max-width:960px){
@@ -305,7 +315,7 @@ footer{background:var(--black);color:var(--white);border-top:var(--border);}
   .nav-links{display:none;}
   .nav-burger{display:flex;}
   .hero-main{grid-template-columns:1fr;padding:80px 24px 20px;}
-  .hero-left{border-right:none;border-bottom:var(--border);padding-right:0;padding-bottom:16px;}
+  .hero-left{border-right:none;padding-right:0;padding-bottom:16px;}
   .hero-right{padding-left:0;padding-top:24px;}
   .ring-3d-wrap{height:260px;}
   .hero-bottom{padding:16px 24px;flex-direction:column;align-items:flex-start;}
@@ -335,6 +345,21 @@ footer{background:var(--black);color:var(--white);border-top:var(--border);}
   .trabalhos-header{flex-direction:column;align-items:flex-start;}
 }
 </style>
+<template id="__bundler_thumbnail" data-bg-color="#F8F8F6">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#F8F8F6"/>
+    <rect x="0" y="0" width="580" height="800" fill="#F8F8F6"/>
+    <rect x="600" y="0" width="600" height="520" fill="#00D94A"/>
+    <path fill="#00D94A" d="M 878,0 C 855,42 818,80 828,138 C 838,198 774,238 757,307 C 742,368 758,408 744,456 C 733,496 793,526 840,522 C 874,519 912,508 946,505 L 1200,505 L 1200,0 Z"/>
+    <text x="60" y="220" font-family="sans-serif" font-weight="900" font-size="160" fill="#0F0F0F" opacity=".9">DIGITAL</text>
+    <text x="60" y="380" font-family="sans-serif" font-weight="900" font-size="160" fill="#0F0F0F" opacity=".9">QUE</text>
+    <text x="60" y="540" font-family="sans-serif" font-weight="900" font-size="130" fill="none" stroke="#0F0F0F" stroke-width="4" opacity=".9">CONVERTE</text>
+    <text x="800" y="320" font-family="sans-serif" font-weight="900" font-size="180" fill="#0F0F0F" text-anchor="middle">ATO.</text>
+    <circle cx="800" cy="320" r="200" fill="none" stroke="#0F0F0F" stroke-width="6" opacity=".3"/>
+    <rect x="0" y="750" width="1200" height="50" fill="#0F0F0F"/>
+    <text x="60" y="783" font-family="sans-serif" font-weight="700" font-size="18" fill="#00D94A" letter-spacing="4">ATO. — SOLUÇÕES EM TECNOLOGIA DIGITAL</text>
+  </svg>
+</template>
 </head>
 <body>
 
@@ -363,9 +388,12 @@ footer{background:var(--black);color:var(--white);border-top:var(--border);}
 <!-- HERO -->
 <section class="hero" id="inicio">
 
+  <!-- Glow overlay -->
+  <div class="hero-glow"></div>
+
   <!-- Green blob background -->
   <svg class="hero-blob" viewBox="0 0 1512 780" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <path fill="#00D94A" d="M 878,0 C 855,42 818,80 828,138 C 838,198 774,238 757,307 C 742,368 758,408 744,456 C 733,496 793,526 840,522 C 874,519 912,508 946,505 L 1512,505 L 1512,0 Z"/>
+    <path fill="#00D94A" opacity="0.55" d="M 878,0 C 855,42 818,80 828,138 C 838,198 774,238 757,307 C 742,368 758,408 744,456 C 733,496 793,526 840,522 C 874,519 912,508 946,505 L 1512,505 L 1512,0 Z"/>
   </svg>
 
   <!-- Geo decorative elements -->
@@ -391,21 +419,23 @@ footer{background:var(--black);color:var(--white);border-top:var(--border);}
     </div>
 
     <!-- Right: 3D Ring -->
-    <div class="hero-right" style="transform: translate(4.99479px, -0.961686px); opacity: 1">
-      <div class="ring-3d-wrap">
-        <!-- ATO text sits at z=0 — 3D panels orbit around it -->
-        <div class="ring-ato-text">ATO.</div>
-        <!-- Ring banner filled by JS -->
+    <div class="hero-right">
+      <div class="ring-scene">
+        <div class="ring-planet" style="font-size: 303px">ATO.</div>
         <div class="ring-banner" id="ringBanner"></div>
+        <!-- geo tiny shapes around ATO. -->
+        <div style="position:absolute;top:-60px;left:20px;width:10px;height:10px;background:var(--green);border-radius:50;"></div>
+        <div style="position:absolute;top:-40px;right:-30px;width:7px;height:7px;background:var(--yellow);border:1.5px solid rgba(0,0,0,.3);"></div>
+        <div style="position:absolute;bottom:-50px;left:-20px;width:6px;height:6px;background:var(--white);border-radius:50%;"></div>
+        <div style="position:absolute;bottom:-30px;right:10px;"><svg width="20" height="20" viewBox="0 0 20 20"><polygon points="10,1 19,19 1,19" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1.5"/></svg></div>
       </div>
-      <!-- Sticker badge -->
-      <div class="hero-badge-sticker geo" style="bottom:10%;left:8%;z-index:2;">
+      <!-- Sticker badge — pushed further away -->
+      <div class="hero-badge-sticker geo" style="bottom:4%;left:2%;z-index:2;">
         <span>Tecnologia</span>
         <span>que vende</span>
       </div>
-      <!-- Geo small shapes near ring -->
-      <div class="geo" style="top:8%;right:6%;width:14px;height:14px;background:var(--yellow);border:2px solid var(--black);"></div>
-      <div class="geo" style="bottom:12%;right:8%;width:8px;height:8px;background:var(--green);border-radius:50%;"></div>
+      <div class="geo" style="top:6%;right:4%;width:14px;height:14px;background:var(--yellow);border:2px solid rgba(0,0,0,.3);"></div>
+      <div class="geo" style="bottom:8%;right:5%;width:8px;height:8px;background:var(--green);border-radius:50%;"></div>
     </div>
   </div>
 
@@ -414,10 +444,10 @@ footer{background:var(--black);color:var(--white);border-top:var(--border);}
     <p class="hero-tagline">Sistemas, sites, apps e social media com IA para clínicas, escritórios e negócios que querem crescer — convertendo digital em faturamento real.</p>
     <div class="hero-cta-group">
       <a class="btn btn-primary" href="#contato">Começar agora</a>
-      <a class="btn btn-outline" href="#solucoes">O que fazemos</a>
+      <a class="btn btn-outline hero-btn" href="#solucoes">O que fazemos</a>
     </div>
   </div>
-  <div class="scroll-hint"><div class="scroll-arrow-vert"></div><span>Rolar</span></div>
+
 </section>
 
 <!-- MARQUEE -->
@@ -563,7 +593,7 @@ footer{background:var(--black);color:var(--white);border-top:var(--border);}
 <!-- EQUIPE -->
 <section class="equipe section" id="equipe">
   <!-- geo -->
-  <div class="geo" style="bottom:20px;left:40px;font-family:'Bebas Neue',sans-serif;font-size:160px;color:var(--black);opacity:.03;line-height:1;pointer-events:none;">CREW</div>
+
   <div class="equipe-intro">
     <div><div class="section-label">Quem somos</div><h2 class="section-title">A EQUIPE<br>POR TRÁS<br>DA ATO.</h2></div>
     <p class="equipe-body" style="padding-top:80px;">A operação ATO. é feita por especialistas que entendem de negócios tradicionais em transição digital. Sem jargão, sem filosofia divorciada da realidade de vendas e operação.<br><br>Sprints curtos, feedback contínuo e documentação viva. Ao fim de cada ciclo, você sabe exatamente o que foi entregue e por quê.</p>
@@ -712,8 +742,19 @@ footer{background:var(--black);color:var(--white);border-top:var(--border);}
 
 <script>
 // ── NAV ──
-window.addEventListener('scroll',()=>{
-  document.getElementById('nav').classList.toggle('visible', window.scrollY > window.innerHeight*.7);
+  window.addEventListener('scroll',()=>{
+  const nav = document.getElementById('nav');
+  if(window.scrollY > window.innerHeight * .7){
+    nav.classList.add('visible');
+    nav.classList.add('floating');
+    nav.querySelector('.nav-logo').style.color='var(--white)';
+    nav.querySelectorAll('.nav-links a:not(.nav-cta)').forEach(a=>a.style.color='rgba(255,255,255,.8)');
+  } else {
+    nav.classList.remove('visible');
+    nav.classList.remove('floating');
+    nav.querySelector('.nav-logo').style.color='';
+    nav.querySelectorAll('.nav-links a:not(.nav-cta)').forEach(a=>a.style.color='');
+  }
 });
 function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
 function closeMenu(){document.getElementById('mobileMenu').classList.remove('open');}
@@ -730,38 +771,45 @@ function handleSubmit(e){
   },900);
 }
 
-// ── 3D RING (adapted from CSS cylinder technique) ──
+// ── 3D RING ──
 (function initRing(){
+  const frases = [
+    'TECNOLOGIA QUE TRANSFORMA NEGÓCIOS ',
+    'DIGITAL QUE CONVERTE EM RESULTADO ',
+    'SISTEMAS • SITES • APPS • SOCIAL IA ',
+    'DO DIGITAL AO FATURAMENTO REAL ',
+    'CRESCIMENTO QUE APARECE NO CAIXA '
+  ];
+  const frase = frases[Math.floor(Math.random() * frases.length)];
+  const container = document.getElementById('ringBanner');
+  if(!container) return;
+  const PANEL_W = 50;
   const NUM = 24;
-  const PANEL_W = 55;
-  const RADIUS = 210;
-  const TEXT = ' • TECNOLOGIA DIGITAL • CRESCIMENTO • RESULTADOS • ATO. ';
-  const banner = document.getElementById('ringBanner');
-  if(!banner) return;
-
+  const CIRC = NUM * PANEL_W;
+  // measure font size
+  const m = document.createElement('span');
+  m.style.cssText='visibility:hidden;position:absolute;white-space:nowrap;font-family:Bebas Neue,sans-serif;font-weight:700;';
+  m.innerText = frase;
+  document.body.appendChild(m);
+  let fs = 10;
+  m.style.fontSize = fs + 'px';
+  while(m.offsetWidth < CIRC && fs < 100){ fs++; m.style.fontSize = fs + 'px'; }
+  document.body.removeChild(m);
+  container.innerHTML = '';
   for(let i = 0; i < NUM; i++){
     const p = document.createElement('div');
     p.className = 'ring-panel';
-    p.style.setProperty('--angle', (360 / NUM * i) + 'deg');
-    p.style.setProperty('--left', (PANEL_W * i * -1) + 'px');
-    banner.appendChild(p);
+    p.style.setProperty('--angle', (360/NUM*i)+'deg');
+    p.style.setProperty('--left', (PANEL_W*i*-1)+'px');
+    p.style.setProperty('--font-size', fs+'px');
+    p.setAttribute('data-text', frase);
+    container.appendChild(p);
   }
 })();
 
-// ── SCROLL REVEAL ──
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});
-},{threshold:0.08});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+// ── SCROLL REVEAL: disabled ──
 
-// ── HERO PARALLAX ON RING ──
-const heroRight = document.querySelector('.hero-right');
-window.addEventListener('mousemove',e=>{
-  if(!heroRight)return;
-  const x=(e.clientX/window.innerWidth-.5)*10;
-  const y=(e.clientY/window.innerHeight-.5)*6;
-  heroRight.style.transform=`translate(${x}px,${y}px)`;
-});
+// ── HERO PARALLAX: disabled ──
 </script>
 </body>
 </html>
