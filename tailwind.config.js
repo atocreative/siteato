@@ -8,11 +8,12 @@ export default {
     extend: {
       colors: {
         ato: {
-          green: '#00D94A',
-          'green-dark': '#00A838',
-          black: '#0F0F0F',
-          white: '#F8F8F6',
-          off: '#F0F0EE',
+          green: '#39FF14',
+          'green-dark': '#2BD60E',
+          glow: '#0C3A14',
+          black: '#0D0D0D',
+          white: '#F4EFE4',
+          off: '#ECEAE5',
           yellow: '#FFE500',
           orange: '#FF6B1A',
           blue: '#3B6CF0',
@@ -21,8 +22,9 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Roboto', 'sans-serif'],
-        display: ['Roboto', 'sans-serif'],
+        sans: ['Space Grotesk', 'sans-serif'],
+        display: ['Archivo Black', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
       },
       fontSize: {
         display: 'clamp(58px, 10vw, 155px)',
@@ -34,9 +36,9 @@ export default {
         brutal: '2.5px',
       },
       boxShadow: {
-        brutal: '5px 5px 0 #0F0F0F',
-        'brutal-sm': '3px 3px 0 #0F0F0F',
-        'brutal-lg': '8px 8px 0 #0F0F0F',
+        brutal: '5px 5px 0 #0D0D0D',
+        'brutal-sm': '3px 3px 0 #0D0D0D',
+        'brutal-lg': '8px 8px 0 #0D0D0D',
       },
       animation: {
         'scroll-marquee': 'scroll 20s linear infinite',

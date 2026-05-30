@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react'
 import { motion } from 'framer-motion'
-import Button from '@components/common/Button'
 
 export const StarsBackground = () => {
   const stars = useMemo(() => {
@@ -169,16 +168,13 @@ export default function Hero() {
               style={{ perspective: '1200px' }}
             >
               <div className="relative" style={{ transformStyle: 'preserve-3d' }}>
-                <div
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-display font-black select-none z-10"
-                  style={{
-                    fontSize: 'clamp(4.4rem, 8.8vw, 8.125rem)',
-                    fontWeight: 900,
-                    letterSpacing: '-4px',
-                    textShadow: '0 0 50px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2)',
-                  }}
-                >
-                  ATO.
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex items-center justify-center">
+                  <img
+                    src="/atoverde.svg"
+                    alt="ATO. Soluções Digitais"
+                    className="object-contain select-none"
+                    style={{ width: '250px', minWidth: '250px', minHeight: '80px' }}
+                  />
                 </div>
 
                 <div
@@ -203,33 +199,6 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      {/* Bottom bar — border full-width, content containerized */}
-      <div className="relative z-20 border-t border-white/10">
-        <motion.div
-          className="ato-container flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 py-8"
-          variants={itemVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <p className="text-xs sm:text-sm leading-relaxed opacity-60 max-w-sm">
-            Sistemas, sites, apps e social media com IA para clínicas, escritórios e negócios que querem crescer — convertendo digital em faturamento real.
-          </p>
-          <div className="flex gap-3 sm:gap-4 shrink-0">
-            <Button
-              variant="primary"
-              onClick={() => document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              Começar agora
-            </Button>
-            <Button
-              variant="outline"
-              onClick={() => document.getElementById('solucoes')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              O que fazemos
-            </Button>
-          </div>
-        </motion.div>
-      </div>
 
       <style>{`
         @keyframes orbit-spin {

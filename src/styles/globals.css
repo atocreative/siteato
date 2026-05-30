@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,8 +9,29 @@ html {
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   @apply font-sans;
+}
+
+h1, h2, h3 {
+  font-family: 'Archivo Black', sans-serif;
+  font-weight: 900;
+}
+
+p, a, button, li, span {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.font-mono, .mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Trava de layout — container fixo de 1024px (seções do meio p/ baixo) */
+.container {
+  width: 1024px;
+  margin: 0 auto;
+  padding: 0px;
+  position: relative;
 }
 
 /* Animações para o Background Espacial da Hero */
@@ -43,3 +66,5 @@ body {
     padding-right: 2rem;
   }
 }
+
+/* Garante que #0F0F0F legado não apareça — todos os border-brutal usam #0D0D0D via tailwind.config */

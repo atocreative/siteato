@@ -32,9 +32,9 @@ export default function Navigation({ isFloating }: NavigationProps) {
           right: '20px',
           height: '60px',
           padding: '0 28px',
-          background: '#0F0F0F',
+          background: '#0D0D0D',
           border: '2px solid rgba(255,255,255,0.15)',
-          boxShadow: '6px 6px 0 #00D94A',
+          boxShadow: '6px 6px 0 #39FF14',
         }}
       >
         {/* Logo */}
@@ -62,16 +62,16 @@ export default function Navigation({ isFloating }: NavigationProps) {
             <a
               href="#contato"
               className="text-[11px] font-bold uppercase tracking-[2px] px-5 py-[9px] bg-ato-green text-ato-black border-[1.5px] border-ato-black inline-block"
-              style={{ boxShadow: '3px 3px 0 #0F0F0F', transition: 'transform .1s, box-shadow .1s' }}
+              style={{ boxShadow: '3px 3px 0 #0D0D0D', transition: 'transform .1s, box-shadow .1s' }}
               onMouseEnter={e => {
                 const el = e.currentTarget as HTMLElement
                 el.style.transform = 'translate(2px,2px)'
-                el.style.boxShadow = '1px 1px 0 #0F0F0F'
+                el.style.boxShadow = '1px 1px 0 #0D0D0D'
               }}
               onMouseLeave={e => {
                 const el = e.currentTarget as HTMLElement
                 el.style.transform = ''
-                el.style.boxShadow = '3px 3px 0 #0F0F0F'
+                el.style.boxShadow = '3px 3px 0 #0D0D0D'
               }}
             >
               Falar com a ATO.
@@ -104,7 +104,7 @@ export default function Navigation({ isFloating }: NavigationProps) {
               top: '84px',
               left: '20px',
               right: '20px',
-              background: '#0F0F0F',
+              background: '#0D0D0D',
               border: '2px solid rgba(255,255,255,0.15)',
               borderTop: 'none',
               padding: '24px 28px',
@@ -123,7 +123,7 @@ export default function Navigation({ isFloating }: NavigationProps) {
             <a
               href="#contato"
               className="text-[11px] font-bold uppercase tracking-[2px] px-5 py-3 bg-ato-green text-ato-black border-[1.5px] border-ato-black self-start mt-2"
-              style={{ boxShadow: '3px 3px 0 #0F0F0F' }}
+              style={{ boxShadow: '3px 3px 0 #0D0D0D' }}
               onClick={close}
             >
               Falar com a ATO.

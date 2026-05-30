@@ -7,28 +7,28 @@ export default function Services() {
       id: '1',
       number: '01',
       title: 'Para empresas que precisam vender melhor',
-      description: 'Sites, landing pages e estruturas digitais criadas para aumentar percepção de valor, gerar contatos qualificados e transformar presença digital em oportunidade real de venda.',
+      description: 'Sites e landing pages de alta conversão para transformar cliques em clientes.',
       services: ['Sites institucionais', 'Landing pages', 'Páginas de captura', 'Apresentação comercial', 'Estrutura para tráfego pago']
     },
     {
       id: '2',
       number: '02',
       title: 'Para empresas que precisam operar melhor',
-      description: 'Sistemas internos, dashboards e automações personalizadas para reduzir tarefas manuais, organizar processos e facilitar o dia a dia da operação.',
+      description: 'Sistemas e dashboards sob medida para automatizar processos e organizar a casa.',
       services: ['Sistemas sob medida', 'Dashboards', 'Automações', 'CRM interno', 'Ferramentas operacionais']
     },
     {
       id: '3',
       number: '03',
       title: 'Para empresas que querem crescer com inteligência',
-      description: 'Soluções com IA, análise de dados e automações inteligentes para apoiar decisões, melhorar atendimento e aumentar eficiência com tecnologia aplicada ao negócio.',
+      description: 'IA e análise de dados para apoiar decisões e escalar o seu negócio.',
       services: ['IA para atendimento', 'IA para gestão', 'Automações comerciais', 'Análise operacional', 'Integrações e dados']
     },
     {
       id: '4',
       number: '04',
       title: 'Para empresas que querem se posicionar melhor',
-      description: 'Estratégias digitais e estruturas de comunicação para construir autoridade, clareza de marca e presença profissional no mercado.',
+      description: 'Estratégia e design para construir autoridade e clareza de marca no mercado.',
       services: ['Social media estratégico', 'Posicionamento digital', 'Conteúdo', 'Identidade de comunicação', 'Estrutura comercial']
     }
   ]
@@ -47,23 +47,19 @@ export default function Services() {
   }
 
   return (
-    <section id="solucoes" className="py-20 relative overflow-hidden">
-      <div className="ato-container">
+    <section id="solucoes" className="py-20 bg-ato-white relative overflow-hidden">
+      <div className="container">
         <motion.div
-          className="mb-16"
+          className="mb-16 text-center"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={containerVariants}
         >
-          <div className="flex items-center gap-3 mb-8">
-            <div className="w-7 h-0.5 bg-ato-green"></div>
-            <span className="text-xs font-bold uppercase tracking-widest">O que resolvemos</span>
-          </div>
-          <h2 className="font-display font-black text-4xl md:text-5xl lg:text-6xl xl:text-7xl uppercase leading-tight tracking-tight mb-4 break-words">
+          <h2 className="font-display font-black text-4xl md:text-5xl lg:text-6xl xl:text-7xl uppercase leading-tight tracking-tight mb-4 break-words mx-auto">
             NOSSAS<br />SOLUÇÕES
           </h2>
-          <p className="text-sm opacity-50 max-w-lg leading-relaxed">
+          <p className="text-sm opacity-50 max-w-lg leading-relaxed mx-auto">
             A ATO não vende ferramentas isoladas. Entendemos sua operação e construímos a estrutura digital certa para o seu problema real.
           </p>
         </motion.div>

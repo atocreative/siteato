@@ -50,7 +50,8 @@
       "PowerShell(Get-Process *)",
       "PowerShell(Get-NetTCPConnection *)",
       "PowerShell(npm run *)",
-      "PowerShell(netstat *)"
+      "PowerShell(netstat *)",
+      "Bash(rtk tsc *)"
     ],
     "deny": []
   },
