@@ -4,7 +4,7 @@
 .env.*.local
 *.key
 *.pem
-
+.claude/
 # Pastas de Orquestração de IA (Não devem ir para o GitHub)
 .planning/
 .paperclip/
