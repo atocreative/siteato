@@ -36,7 +36,7 @@ export const StarsBackground = () => {
       <div
         className="absolute inset-0 z-10"
         style={{
-          backgroundImage: 'radial-gradient(at 75% 0%, rgba(0, 217, 74, 0.28) 0%, transparent 55%), radial-gradient(at 15% 100%, rgba(0, 217, 74, 0.1) 0%, transparent 45%)'
+          backgroundImage: 'radial-gradient(at 75% 0%, rgba(57, 255, 20, 0.3) 0%, transparent 55%), radial-gradient(at 15% 100%, rgba(57, 255, 20, 0.2) 0%, transparent 45%)'
         }}
       />
     </div>
@@ -52,7 +52,7 @@ export default function Hero() {
 
     const text = 'APPS • PLATAFORMAS • AUTOMAÇÃO COM IA • ALTA PERFORMANCE'
     const repeatedText = `${text}   •   ${text}   •   `
-    const radius = 280
+    const radius = 250
     const panelCount = 28
     const panelWidth = (2 * Math.PI * radius) / panelCount
     const circumference = panelWidth * panelCount
@@ -105,7 +105,7 @@ export default function Hero() {
         `font-size:${fontSize}px`,
         'width:max-content',
         'white-space:nowrap',
-        'color:#d1d1d1',
+        'color:#fff',
         "font-family:'Arial Black', Arial, sans-serif",
         'font-weight:900',
         'letter-spacing:1px',
@@ -163,36 +163,35 @@ export default function Hero() {
 
           {/* Right: 3D orbit system */}
           <motion.div className="flex items-center justify-center" variants={itemVariants}>
+            {/* Aquário 3D — perspective + preserve-3d no MESMO container pai */}
             <div
-              className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-[340px] lg:h-[340px] xl:w-[400px] xl:h-[400px] flex items-center justify-center"
-              style={{ perspective: '1200px' }}
+              className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-[340px] lg:h-[340px] xl:w-[400px] xl:h-[400px] scale-75 sm:scale-90 md:scale-100 transform origin-center"
+              style={{ perspective: '1000px', transformStyle: 'preserve-3d' }}
             >
-              <div className="relative" style={{ transformStyle: 'preserve-3d' }}>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex items-center justify-center">
-                  <img
-                    src="/atoverde.svg"
-                    alt="ATO. Soluções Digitais"
-                    className="object-contain select-none"
-                    style={{ width: '250px', minWidth: '250px', minHeight: '80px' }}
-                  />
-                </div>
+              {/* Logo — irmã direta do anel, cravada no Z=0 (centro da órbita), sem z-index */}
+              <img
+                src="/atoverde.svg"
+                alt="ATO. Soluções Digitais"
+                className="absolute object-contain select-none w-40 md:w-64 lg:w-[250px]"
+                style={{ top: '50%', left: '50%', transform: 'translate3d(-50%, -50%, 0px)', minWidth: '150px', minHeight: '60px', filter: 'drop-shadow(0px 10px 15px rgba(0,0,0,0.8))', willChange: 'filter' }}
+              />
 
+              {/* Anel de texto — irmão direto da logo no mesmo espaço 3D */}
+              <div
+                className="absolute top-1/2 left-1/2"
+                style={{
+                  transformStyle: 'preserve-3d',
+                  animation: '20s ease-in-out',
+                }}
+              >
                 <div
+                  ref={mainOrbitRef}
                   className="absolute top-1/2 left-1/2"
                   style={{
                     transformStyle: 'preserve-3d',
-                    animation: 'nuclear-wobble 20s ease-in-out infinite',
+                    animation: 'orbit-spin 30s linear infinite',
                   }}
-                >
-                  <div
-                    ref={mainOrbitRef}
-                    className="absolute top-1/2 left-1/2"
-                    style={{
-                      transformStyle: 'preserve-3d',
-                      animation: 'orbit-spin 30s linear infinite',
-                    }}
-                  />
-                </div>
+                />
               </div>
             </div>
           </motion.div>
@@ -201,13 +200,18 @@ export default function Hero() {
 
 
       <style>{`
+      @keyframes orbit-3d {
+          0% { transform: rotateX(70deg) rotateZ(0deg); }
+          100% { transform: rotateX(70deg) rotateZ(360deg); }
+        }
         @keyframes orbit-spin {
           0% { transform: rotateY(0deg); }
           100% { transform: rotateY(360deg); }
+          0% { transform: rotateX(0deg) rotateZ(10deg); }
         }
 
         @keyframes nuclear-wobble {
-          0% { transform: rotateX(25deg) rotateZ(10deg); }
+          0% { transform: rotateX(25deg) rotateZ(0deg); }
           25% { transform: rotateX(-15deg) rotateZ(20deg); }
           50% { transform: rotateX(-25deg) rotateZ(-10deg); }
           75% { transform: rotateX(15deg) rotateZ(-20deg); }

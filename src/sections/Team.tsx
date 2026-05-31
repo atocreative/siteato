@@ -2,22 +2,26 @@ export default function Team() {
   const team = [
     {
       id: '1',
-      role: 'CEO & Fundador',
-      name: 'João Gabriel',
-      bio: 'Graduando em Ciência de Dados e formado em Administração. Dono de uma visão de negócio afiada, é o estrategista que conecta dados, mercado e estética. Sua missão é garantir que toda solução seja um motor real de faturamento e crescimento para o cliente.',
+      role: 'CEO & Co-founder',
+      name: 'João Oliveira',
+      photo: '/joao.png',
+      photoAlt: 'João Gabriel - CEO da ATO',
+      bio: 'Administrador, graduando em Ciência de Dados e estrategista de marketing. Especialista em posicionamento digital e gestão de pessoas com foco em cultura organizacional. Une dados, mercado e estética com um único objetivo: transformar a presença digital de nossos clientes em um motor real de faturamento e crescimento.',
       rotation: '-rotate-1',
     },
     {
       id: '2',
-      role: 'CTO & Fundador',
+      role: 'CTO & Co-founder',
       name: 'Caio Vilela',
-      bio: 'Graduado em Análise e Desenvolvimento de Sistemas (ADS) e pós-graduando em Engenharia de IA. Uma mente onde engenharia e design se encontram. Responsável por arquitetar as soluções da ATO, traduzindo estratégias de negócio em sistemas e ferramentas impecáveis.',
+      photo: '/caio.png',
+      photoAlt: 'Caio Vilela - CTO da ATO',
+      bio: 'Desenvolvedor e especialista em Engenharia de IA. Responsável por arquitetar os sistemas e ferramentas da empresa, une engenharia e sensibilidade de design para transformar estratégias de mercado em soluções tecnológicas focadas em performance, automação e crescimento real.',
       rotation: 'rotate-1',
     }
   ]
 
   return (
-    <section id="equipe" className="py-20 bg-ato-white border-b-brutal border-ato-black overflow-hidden">
+    <section id="equipe" className="py-12 md:py-20 bg-ato-white overflow-hidden">
       <div className="container">
         <div className="text-center mb-16">
           <h2 className="font-display font-black text-4xl md:text-5xl lg:text-6xl uppercase leading-tight tracking-tight mb-6 break-words mx-auto">
@@ -28,17 +32,17 @@ export default function Team() {
           </p>
         </div>
 
-        <div className="flex gap-12 justify-center flex-wrap">
+        <div className="flex flex-col md:flex-row gap-8 md:gap-12 justify-center items-center md:flex-wrap">
           {team.map((member) => (
             <div
               key={member.id}
-              className={`${member.rotation} w-[280px] bg-ato-off border-brutal border-ato-black shadow-lg p-3 pb-10`}
+              className={`${member.rotation} w-full max-w-[280px] bg-ato-off border-brutal border-ato-black shadow-lg p-3 pb-10`}
             >
-              <div className="w-full aspect-square bg-ato-black mb-5 flex items-center justify-center overflow-hidden">
-                <span className="font-display font-black text-6xl text-ato-green opacity-20 select-none">
-                  {member.name.charAt(0)}
-                </span>
-              </div>
+              <img
+                src={member.photo}
+                alt={member.photoAlt}
+                className="w-full aspect-square object-cover object-top mb-4 bg-gray-200"
+              />
               <div className="px-2">
                 <span className="font-mono text-[10px] font-bold tracking-widest px-2 py-1 bg-ato-green text-ato-black border border-ato-black mb-3 inline-block uppercase">
                   {member.role}

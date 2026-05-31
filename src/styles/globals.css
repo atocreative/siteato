@@ -26,12 +26,19 @@ p, a, button, li, span {
   font-family: 'JetBrains Mono', monospace;
 }
 
-/* Trava de layout — container fixo de 1024px (seções do meio p/ baixo) */
+/* Trava de layout — container 1024px no desktop, fluido no mobile */
 .container {
-  width: 1024px;
+  width: 100%;
+  max-width: 1024px;
   margin: 0 auto;
-  padding: 0px;
+  padding: 0 1rem;
   position: relative;
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 0;
+  }
 }
 
 /* Animações para o Background Espacial da Hero */

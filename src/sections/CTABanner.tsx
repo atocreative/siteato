@@ -15,26 +15,28 @@ export default function CTABanner() {
           <h2 className="font-display font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase leading-none tracking-tight mb-6 break-words">
             PRONTO PARA<br />TIRAR SUA<br />OPERAÇÃO DO<br />IMPROVISO?
           </h2>
-          <p className="text-sm md:text-base opacity-70 max-w-md mb-10 leading-relaxed">
-            Criamos estruturas digitais sob medida para sua empresa operar melhor, vender mais e crescer no mundo real.
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Button
-              variant="outline"
-              size="lg"
-              className="bg-ato-black text-ato-white border-ato-black shadow-brutal"
-              onClick={() => {
-                window.location.href = 'mailto:contato@atosolutions.com.br'
+          <div className="flex flex-wrap gap-4 justify-center mt-8">
+            <a
+              href="https://wa.me/556191995064"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-bold uppercase tracking-widest px-8 py-4 bg-ato-black text-ato-white inline-block"
+              style={{ boxShadow: '5px 5px 0 #39FF14', transition: 'transform .1s, box-shadow .1s' }}
+              onMouseEnter={e => {
+                const el = e.currentTarget as HTMLAnchorElement
+                el.style.transform = 'translate(4px,4px)'
+                el.style.boxShadow = 'none'
+              }}
+              onMouseLeave={e => {
+                const el = e.currentTarget as HTMLAnchorElement
+                el.style.transform = ''
+                el.style.boxShadow = '5px 5px 0 #39FF14'
               }}
             >
               Quero saber mais
-            </Button>
+            </a>
           </div>
         </motion.div>
-      </div>
-
-      <div className="absolute right-0 bottom-0 text-[14rem] font-display font-black text-black/5 pointer-events-none leading-none select-none">
-        →
       </div>
     </section>
   )

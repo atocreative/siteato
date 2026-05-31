@@ -5,13 +5,14 @@ interface NavigationProps {
   isFloating: boolean
 }
 
+const WA = 'https://wa.me/556191995064'
+
 export default function Navigation({ isFloating }: NavigationProps) {
   const [menuOpen, setMenuOpen] = useState(false)
 
   const navLinks = [
     { href: '#solucoes', label: 'Soluções' },
     { href: '#sobre',    label: 'Sobre' },
-    { href: '#cases',    label: 'Cases' },
     { href: '#contato',  label: 'Contato' },
   ]
 
@@ -38,12 +39,8 @@ export default function Navigation({ isFloating }: NavigationProps) {
         }}
       >
         {/* Logo */}
-        <a
-          href="#"
-          className="font-display font-black text-ato-white tracking-widest"
-          style={{ fontSize: '22px', letterSpacing: '3px' }}
-        >
-          ATO.
+        <a href="#">
+          <img src="/atobranco.svg" alt="ATO." className="w-auto object-contain cursor-pointer" style={{ maxHeight: '32px' }} />
         </a>
 
         {/* Desktop links */}
@@ -60,7 +57,9 @@ export default function Navigation({ isFloating }: NavigationProps) {
           ))}
           <li>
             <a
-              href="#contato"
+              href={WA}
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-[11px] font-bold uppercase tracking-[2px] px-5 py-[9px] bg-ato-green text-ato-black border-[1.5px] border-ato-black inline-block"
               style={{ boxShadow: '3px 3px 0 #0D0D0D', transition: 'transform .1s, box-shadow .1s' }}
               onMouseEnter={e => {
@@ -121,7 +120,9 @@ export default function Navigation({ isFloating }: NavigationProps) {
               </a>
             ))}
             <a
-              href="#contato"
+              href={WA}
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-[11px] font-bold uppercase tracking-[2px] px-5 py-3 bg-ato-green text-ato-black border-[1.5px] border-ato-black self-start mt-2"
               style={{ boxShadow: '3px 3px 0 #0D0D0D' }}
               onClick={close}

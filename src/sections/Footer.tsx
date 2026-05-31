@@ -8,7 +8,7 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="bg-ato-black text-ato-white border-t-brutal border-ato-white">
+    <footer className="bg-ato-black text-ato-white">
       <div className="ato-container">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border-b border-white/10">
 
@@ -57,13 +57,13 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 py-4 text-xs">
-          <div className="flex items-center gap-4">
-            <img src="/atobranco.svg" alt="ATO." className="w-24 object-contain" />
-            <span className="opacity-20">© 2025 ATO. Soluções Digitais. Todos os direitos reservados.</span>
-          </div>
-          <span className="font-mono text-[10px] tracking-widest text-ato-green opacity-60 uppercase">
+        <div className="flex flex-col md:flex-row justify-center md:justify-between items-center text-center gap-6 md:gap-4 py-8 md:py-4 text-xs">
+          <img src="/atobranco.svg" alt="ATO." className="w-24 object-contain order-1" />
+          <span className="font-mono text-[10px] tracking-widest text-ato-green opacity-80 uppercase order-2 md:order-3" style={{ color: '#39FF14' }}>
             Sistemas em movimento.
+          </span>
+          <span className="opacity-20 order-3 md:order-2">
+            © 2026 ATO. Soluções Digitais. Todos os direitos reservados.
           </span>
         </div>
       </div>
