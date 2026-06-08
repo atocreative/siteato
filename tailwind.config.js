@@ -42,6 +42,7 @@ export default {
       },
       animation: {
         'scroll-marquee': 'scroll 20s linear infinite',
+        'scroll-marquee-fast': 'scroll 22s linear infinite',
         'ring-spin': 'ring-spin 24s linear infinite',
       },
       keyframes: {

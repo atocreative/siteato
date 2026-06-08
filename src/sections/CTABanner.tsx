@@ -3,7 +3,7 @@ import Button from '@components/common/Button'
 
 export default function CTABanner() {
   return (
-    <section id="contato" className="scroll-mt-24 bg-gradient-to-b from-ato-green to-ato-green-dark text-ato-black py-20 md:py-28 relative overflow-hidden">
+    <section id="contato" className="scroll-mt-24 text-ato-black py-20 md:py-28 relative overflow-hidden" style={{ background: 'linear-gradient(to bottom, #0CBF0C, #034A1A)' }}>
       <div className="container">
         <motion.div
           className="relative z-10 flex flex-col items-center text-center mx-auto max-w-3xl"

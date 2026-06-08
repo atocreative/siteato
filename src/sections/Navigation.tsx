@@ -11,9 +11,12 @@ export default function Navigation({ isFloating }: NavigationProps) {
   const [menuOpen, setMenuOpen] = useState(false)
 
   const navLinks = [
+    { href: '#sobre', label: 'Sobre Nós' },
+    { href: '#clientes', label: 'Clientes' },
+    { href: '#transformacao', label: 'Transformação' },
     { href: '#solucoes', label: 'Soluções' },
-    { href: '#sobre',    label: 'Sobre' },
-    { href: '#contato',  label: 'Contato' },
+    { href: '#equipe', label: 'Equipe' },
+    { href: '#contato', label: 'Contato' },
   ]
 
   const close = () => setMenuOpen(false)

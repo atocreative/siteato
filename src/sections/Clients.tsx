@@ -37,20 +37,20 @@ export default function Clients() {
   ]
 
   return (
-    <section id="clientes" className="bg-ato-green text-ato-black py-20">
+    <section id="clientes" className="text-ato-black py-20" style={{ backgroundColor: '#0CBF0C' }}>
       {/* Header */}
       <div className="container mb-12">
         <div className="text-center mb-12">
-          <h2 className="font-display font-black text-4xl md:text-5xl lg:text-6xl uppercase leading-tight tracking-tight break-words mx-auto">
+          <h2 className="font-display font-black text-4xl md:text-5xl lg:text-6xl uppercase leading-tight tracking-tight break-words mx-auto text-black">
             NOSSOS<br />CLIENTES
           </h2>
         </div>
       </div>
 
       {/* Logos grid — full-bleed fundo transparente, logos brancas */}
-      <div className="overflow-hidden mb-16">
-        <div className="flex animate-scroll-marquee whitespace-nowrap">
-          {[...logos, ...logos, ...logos].map((logo, i) => (
+      <div className="overflow-hidden mb-16 w-full">
+        <div className="flex w-max animate-scroll-marquee-fast md:animate-scroll-marquee">
+          {[...logos, ...logos, ...logos, ...logos].map((logo, i) => (
             <div
               key={i}
               className="inline-flex items-center justify-center flex-shrink-0 px-10"
@@ -73,13 +73,18 @@ export default function Clients() {
           {testimonials.map((testimonial) => (
             <motion.div
               key={testimonial.id}
-              className="p-8 bg-ato-off border-brutal border-ato-black shadow-brutal"
+              className="p-8 bg-white"
+              style={{
+                border: '1px solid #000000',
+                boxShadow: '4px 4px 0px #000000',
+                borderRadius: '0px'
+              }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4 }}
             >
-              <div className="font-display font-black text-6xl text-ato-green leading-none mb-3">"</div>
+              <div className="font-display font-black text-6xl leading-none mb-3" style={{ color: '#0CBF0C' }}>"</div>
               <p className="text-sm leading-relaxed opacity-70 mb-6 text-ato-black">{testimonial.quote}</p>
               <div className="w-7 h-0.5 bg-ato-black mb-3"></div>
               <div className="text-xs font-bold uppercase tracking-widest text-ato-black">{testimonial.author}</div>

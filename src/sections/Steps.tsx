@@ -16,7 +16,7 @@ export default function Steps() {
   ]
 
   return (
-    <section id="passos" className="bg-ato-black text-ato-white py-12 md:py-20 relative overflow-hidden">
+    <section id="transformacao" className="bg-ato-black text-ato-white py-12 md:py-20 relative overflow-hidden">
       <div className="container">
         <div className="mb-16 text-center">
           <h2 className="font-display font-black text-4xl md:text-5xl lg:text-6xl xl:text-7xl uppercase leading-tight tracking-tight mb-4 break-words mx-auto">

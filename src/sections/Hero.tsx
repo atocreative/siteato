@@ -52,7 +52,8 @@ export default function Hero() {
 
     const text = 'APPS • PLATAFORMAS • AUTOMAÇÃO COM IA • ALTA PERFORMANCE'
     const repeatedText = `${text}   •   ${text}   •   `
-    const radius = 250
+    const isMobile = window.innerWidth < 768
+    const radius = isMobile ? 320 : 250
     const panelCount = 28
     const panelWidth = (2 * Math.PI * radius) / panelCount
     const circumference = panelWidth * panelCount
@@ -68,6 +69,7 @@ export default function Hero() {
       'font-weight:900',
       'letter-spacing:1px',
       'text-transform:uppercase',
+      
     ].join(';')
     probe.innerText = repeatedText
     document.body.appendChild(probe)
@@ -110,6 +112,7 @@ export default function Hero() {
         'font-weight:900',
         'letter-spacing:1px',
         'text-transform:uppercase',
+        'text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000',
       ].join(';')
       span.innerText = repeatedText
 
@@ -138,42 +141,58 @@ export default function Hero() {
 
       {/* Main grid */}
       <motion.div
-        className="flex-1 relative z-20 py-10 md:py-14"
+        className="flex-1 flex flex-col items-center justify-center relative z-20 w-full"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        <div className="ato-container grid grid-cols-1 lg:grid-cols-2 items-center gap-10 lg:gap-6 h-full">
+        <div className="ato-container w-full grid grid-cols-1 lg:grid-cols-2 items-center gap-10 lg:gap-6 ">
           {/* Left: headline copy */}
           <motion.div className="flex flex-col gap-0 min-w-0" variants={itemVariants}>
-            {['DIGITAL', 'QUE', 'CONVERTE', 'RESULTADOS.'].map((word) => (
-              <h1
-                key={word}
-                className="font-display font-black leading-none uppercase tracking-tight break-words text-[2.5rem] sm:text-[3.3rem] md:text-[4.15rem] lg:text-[4.15rem] xl:text-[5rem]"
-                style={word === 'CONVERTE' ? {
-                  color: '#010202',
-                  WebkitTextStroke: '2px #ffffff',
-                  paintOrder: 'stroke fill',
-                } : { color: '#ffffff' }}
-              >
-                {word}
-              </h1>
-            ))}
+            {['DIGITAL', 'QUE', 'CONVERTE', 'RESULTADOS'].map((word) => {
+              const isConverte = word === 'CONVERTE';
+              const isResultados = word === 'RESULTADOS';
+
+              return (
+                <h1
+                  key={word}
+                  className={`font-display font-black leading-none uppercase tracking-tight text-[2.5rem] sm:text-[3.3rem] md:text-[4rem] lg:text-[4rem] xl:text-[4.6rem] ${isResultados ? 'whitespace-nowrap' : 'break-words'}`}
+                  style={isConverte ? {
+                    color: 'transparent',
+                    WebkitTextStroke: '2px #ffffff',
+                    paintOrder: 'stroke fill',
+                  } : { color: '#ffffff' }}
+                >
+                  {word}
+                  {isResultados && (
+                    <span 
+                      className="inline-block ml-1 md:ml-2"
+                      style={{ 
+                        width: '0.22em',
+                        height: '0.22em',
+                        backgroundColor: '#010202',
+                        border: '2px solid #ffffff',
+                      }}
+                    />
+                  )}
+                </h1>
+              );
+            })}
           </motion.div>
 
           {/* Right: 3D orbit system */}
           <motion.div className="flex items-center justify-center" variants={itemVariants}>
             {/* Aquário 3D — perspective + preserve-3d no MESMO container pai */}
             <div
-              className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-[340px] lg:h-[340px] xl:w-[400px] xl:h-[400px] scale-75 sm:scale-90 md:scale-100 transform origin-center"
+              className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-[340px] lg:h-[340px] xl:w-[400px] xl:h-[400px] scale-[0.6] sm:scale-75 md:scale-90 lg:scale-100 transform origin-center"
               style={{ perspective: '1000px', transformStyle: 'preserve-3d' }}
             >
-              {/* Logo — irmã direta do anel, cravada no Z=0 (centro da órbita), sem z-index */}
+              {/* Logo — centered, z-index 2 so it sits between ring halves */}
               <img
                 src="/atoverde.svg"
                 alt="ATO. Soluções Digitais"
-                className="absolute object-contain select-none w-40 md:w-64 lg:w-[250px]"
-                style={{ top: '50%', left: '50%', transform: 'translate3d(-50%, -50%, 0px)', minWidth: '150px', minHeight: '60px', filter: 'drop-shadow(0px 10px 15px rgba(0,0,0,0.8))', willChange: 'filter' }}
+                className="absolute object-contain select-none w-56 sm:w-60 md:w-64 lg:w-[250px]"
+                style={{ top: '50%', left: '50%', transform: 'translate3d(-50%, -50%, 0px)', minWidth: '180px', minHeight: '60px', filter: 'drop-shadow(0px 10px 15px rgba(0,0,0,0.8))', willChange: 'filter' }}
               />
 
               {/* Anel de texto — irmão direto da logo no mesmo espaço 3D */}
@@ -196,26 +215,15 @@ export default function Hero() {
             </div>
           </motion.div>
         </div>
-      </motion.div>
+      </motion.div> 
 
 
       <style>{`
-      @keyframes orbit-3d {
-          0% { transform: rotateX(70deg) rotateZ(0deg); }
-          100% { transform: rotateX(70deg) rotateZ(360deg); }
-        }
+
         @keyframes orbit-spin {
           0% { transform: rotateY(0deg); }
           100% { transform: rotateY(360deg); }
-          0% { transform: rotateX(0deg) rotateZ(10deg); }
-        }
-
-        @keyframes nuclear-wobble {
-          0% { transform: rotateX(25deg) rotateZ(0deg); }
-          25% { transform: rotateX(-15deg) rotateZ(20deg); }
-          50% { transform: rotateX(-25deg) rotateZ(-10deg); }
-          75% { transform: rotateX(15deg) rotateZ(-20deg); }
-          100% { transform: rotateX(25deg) rotateZ(10deg); }
+          0% { transform: rotateX(0deg) rotateZ(20deg);
         }
       `}</style>
     </section>
