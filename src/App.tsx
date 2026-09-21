@@ -54,7 +54,6 @@ export default function App() {
         <Services />
         <Team />
         {false && <Works />}
-        <TornEdge topColor="#ffffff" bottomColor="#050505" variant={2} />
         <CTABanner />
         <Footer />
       </main>

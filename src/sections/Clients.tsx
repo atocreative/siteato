@@ -1,40 +1,25 @@
-import { motion } from 'framer-motion'
-import type { Testimonial } from '@types'
 import { WireRing } from '@components/common/Stickers'
 
 export default function Clients() {
-  const logos = [
-    { src: '/logos/getme.png',               alt: 'GetMe' },
-    { src: '/logos/macho.png',               alt: 'Macho' },
-    { src: '/logos/mcsneakers.png',          alt: 'MC Sneakers' },
-    { src: '/logos/private.png',             alt: 'Private' },
-    { src: '/logos/rfit.png',                alt: 'RFit' },
-    { src: '/logos/guimecell.webp',          alt: 'Guimecell' },
-    { src: '/logos/logo-bs-diagnostica.webp',alt: 'BS Diagnóstica' },
+  const logosRow1 = [
+    { src: '/logos/getme.png',                 alt: 'GetMe' },
+    { src: '/logos/macho.png',                 alt: 'Macho' },
+    { src: '/logos/mcsneakers.png',            alt: 'MC Sneakers' },
+    { src: '/logos/private.png',               alt: 'Private' },
+    { src: '/logos/rfit.png',                  alt: 'RFit' },
+    { src: '/logos/guimecell.webp',            alt: 'Guimecell' },
+    { src: '/logos/logo-bs-diagnostica.webp',  alt: 'BS Diagnóstica' },
   ]
 
-  const testimonials: Testimonial[] = [
-    {
-      id: '1',
-      quote: 'A ATO revolucionou o posicionamento digital da Private. Eles entenderam perfeitamente a nossa essência e entregaram uma estrutura que nos coloca à frente no mercado. O resultado de autoridade é nítido.',
-      author: 'Matheus Torres',
-      role: 'Private',
-      company: ''
-    },
-    {
-      id: '2',
-      quote: 'O site novo não é apenas bonito, é uma verdadeira máquina de vendas. A experiência do usuário ficou impecável e a nossa taxa de conversão disparou desde o lançamento. Entrega absurda.',
-      author: 'Matheus Caetano',
-      role: 'Mc Snearkers',
-      company: ''
-    },
-    {
-      id: '3',
-      quote: 'Com a nova estrutura e as automações implementadas pela ATO, o faturamento da Guimecell aumentou em mais de 10% logo de cara. O negócio escalou de forma muito mais organizada.',
-      author: 'Guilherme',
-      role: 'Guimecell',
-      company: ''
-    }
+  const logosRow2 = [
+    { src: '/logos/logo-veratti-joias.png',    alt: 'Veratti Joias' },
+    { src: '/logos/logo-hold.png',             alt: 'Hold' },
+    { src: '/logos/logo-pit.png',              alt: 'Marcos Pit' },
+    { src: '/logos/logo-emblema-dourado.webp', alt: 'Cliente ATO' },
+    { src: '/logos/logo-arvore-verde.avif',    alt: 'Cliente ATO' },
+    { src: '/logos/logo-funn.avif',            alt: 'Funn' },
+    { src: '/logos/logo.avif',                 alt: 'Cliente ATO' },
+    { src: '/logos/massoterapia.png',          alt: 'Massoterapia' },
   ]
 
   return (
@@ -49,10 +34,16 @@ export default function Clients() {
         </div>
       </div>
 
-      {/* Logos grid — full-bleed fundo transparente, logos brancas */}
-      <div className="overflow-hidden mb-16 w-full">
+      {/* Logos — duas linhas, fundo transparente, com fade nas bordas */}
+      <div
+        className="relative overflow-hidden w-full"
+        style={{
+          maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+        }}
+      >
         <div className="flex w-max animate-scroll-marquee-fast md:animate-scroll-marquee">
-          {[...logos, ...logos, ...logos, ...logos].map((logo, i) => (
+          {[...logosRow1, ...logosRow1, ...logosRow1, ...logosRow1].map((logo, i) => (
             <div
               key={i}
               className="inline-flex items-center justify-center flex-shrink-0 px-10"
@@ -61,32 +52,26 @@ export default function Clients() {
               <img
                 src={logo.src}
                 alt={logo.alt}
-                className="w-auto object-contain grayscale opacity-75 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
-                style={{ maxHeight: '80px' }}
+                className="object-contain grayscale opacity-75 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
+                style={{ width: '150px', height: '70px' }}
               />
             </div>
           ))}
         </div>
-      </div>
-
-      {/* Depoimentos */}
-      <div className="container">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {testimonials.map((testimonial) => (
-            <motion.div
-              key={testimonial.id}
-              className="p-8 bg-white rounded-2xl border border-neutral-200/60 shadow-[0_12px_30px_rgba(0,0,0,0.08)]"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4 }}
+        <div className="flex w-max animate-scroll-marquee-reverse md:animate-scroll-marquee-reverse mt-2">
+          {[...logosRow2, ...logosRow2, ...logosRow2, ...logosRow2].map((logo, i) => (
+            <div
+              key={i}
+              className="inline-flex items-center justify-center flex-shrink-0 px-10"
+              style={{ height: '120px' }}
             >
-              <div className="font-display font-black text-6xl leading-none mb-3" style={{ color: '#0CBF0C' }}>"</div>
-              <p className="text-sm leading-relaxed opacity-70 mb-6 text-ato-black">{testimonial.quote}</p>
-              <div className="w-7 h-0.5 bg-ato-black mb-3"></div>
-              <div className="text-xs font-bold uppercase tracking-widest text-ato-black">{testimonial.author}</div>
-              <div className="text-xs opacity-40 mt-1 text-ato-black">{testimonial.role}</div>
-            </motion.div>
+              <img
+                src={logo.src}
+                alt={logo.alt}
+                className="object-contain grayscale opacity-75 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
+                style={{ width: '150px', height: '70px' }}
+              />
+            </div>
           ))}
         </div>
       </div>

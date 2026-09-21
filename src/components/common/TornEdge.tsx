@@ -65,18 +65,18 @@ function buildTornPath(seed: number, baseline: number, amplitude: number, segmen
 
 /** Duas seeds/baselines distintas por variante — fibra (exterior, mais densa/irregular) e núcleo (cor, recuado) */
 const RECIPES: Record<1 | 2, { fiberSeed: number; coreSeed: number; baseline: number; amplitude: number }> = {
-  1: { fiberSeed: 132471, coreSeed: 907733, baseline: 30, amplitude: 20 },
-  2: { fiberSeed: 552013, coreSeed: 118829, baseline: 34, amplitude: 24 },
+  1: { fiberSeed: 132471, coreSeed: 907733, baseline: 30, amplitude: 26 },
+  2: { fiberSeed: 552013, coreSeed: 118829, baseline: 34, amplitude: 30 },
 }
 
-const FRINGE = 9 // deslocamento vertical do núcleo em relação à fibra — franja branca exposta (~3-5px renderizados)
+const FRINGE = 13 // deslocamento vertical do núcleo em relação à fibra — franja branca exposta, mais irregular
 
 /** Divisor de seção com efeito de papel rasgado — fibra branca + silhueta de cor recuada */
 export default function TornEdge({ topColor, bottomColor, variant = 1, className = '' }: TornEdgeProps) {
   const { fiberSeed, coreSeed, baseline, amplitude } = RECIPES[variant]
   // fibra: mais segmentos e amplitude levemente maior — micro-fibras nítidas, sem aspecto de mancha borrada
-  const fiberPath = buildTornPath(fiberSeed, baseline, amplitude * 1.1, 64)
-  const corePath = buildTornPath(coreSeed, baseline + FRINGE, amplitude * 0.85, 48)
+  const fiberPath = buildTornPath(fiberSeed, baseline, amplitude * 1.1, 80)
+  const corePath = buildTornPath(coreSeed, baseline + FRINGE, amplitude * 0.85, 56)
 
   return (
     <div

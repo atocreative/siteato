@@ -43,12 +43,17 @@ export default {
       animation: {
         'scroll-marquee': 'scroll 20s linear infinite',
         'scroll-marquee-fast': 'scroll 22s linear infinite',
+        'scroll-marquee-reverse': 'scroll-reverse 24s linear infinite',
         'ring-spin': 'ring-spin 24s linear infinite',
       },
       keyframes: {
         scroll: {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(-50%)' }
+        },
+        'scroll-reverse': {
+          '0%': { transform: 'translateX(-50%)' },
+          '100%': { transform: 'translateX(0)' }
         },
         'ring-spin': {
           'to': { transform: 'rotateY(-360deg)' }

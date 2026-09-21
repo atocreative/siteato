@@ -32,13 +32,13 @@ export default function Steps() {
     <section id="transformacao" className="bg-[#080808] text-white py-20 md:py-28 relative overflow-hidden">
       {/* Grão/ruído fílmico — textura tátil visível */}
       <svg
-        className="pointer-events-none absolute inset-0 z-0 w-full h-full opacity-[0.16]"
+        className="pointer-events-none absolute inset-0 z-0 w-full h-full opacity-[0.32]"
         style={{ mixBlendMode: 'overlay' }}
         aria-hidden="true"
       >
         <filter id="steps-grain">
           <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch" />
-          <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.9 0" />
+          <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1.1 0" />
         </filter>
         <rect width="100%" height="100%" filter="url(#steps-grain)" />
       </svg>
