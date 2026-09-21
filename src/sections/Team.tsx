@@ -1,3 +1,5 @@
+import { Daisy } from '@components/common/Stickers'
+
 export default function Team() {
   const team = [
     {
@@ -21,9 +23,46 @@ export default function Team() {
   ]
 
   return (
-    <section id="equipe" className="py-12 md:py-20 bg-ato-white overflow-hidden">
-      <div className="container px-4 md:px-6">
-        <div className="text-center mb-16">
+    <section id="equipe" className="py-12 md:py-20 bg-white relative overflow-hidden">
+      {/* Textura orgânica de fundo — Neo-Memphis, opacidade baixa, não interativa */}
+      <svg
+        className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.05] z-0"
+        viewBox="0 0 1200 800"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid slice"
+        aria-hidden="true"
+      >
+        <path
+          d="M-50 120 C 150 20, 350 220, 550 100 S 900 40, 1150 160"
+          stroke="#111111"
+          strokeWidth="10"
+          strokeLinecap="round"
+        />
+        <path
+          d="M-80 480 C 180 380, 320 620, 560 500 S 880 380, 1250 540"
+          stroke="#111111"
+          strokeWidth="8"
+          strokeLinecap="round"
+        />
+        <circle cx="180" cy="650" r="120" stroke="#111111" strokeWidth="6" />
+        <circle cx="1050" cy="140" r="90" stroke="#111111" strokeWidth="6" />
+        <path
+          d="M700 700 C 780 620, 900 720, 980 650 S 1120 600, 1220 680"
+          stroke="#111111"
+          strokeWidth="8"
+          strokeLinecap="round"
+        />
+        <path
+          d="M50 260 C 40 340, 140 380, 120 300 S 90 200, 50 260 Z"
+          stroke="#111111"
+          strokeWidth="6"
+        />
+      </svg>
+
+      <div className="relative z-10 container px-4 md:px-6">
+        <div className="relative text-center mb-16">
+          <Daisy className="hidden md:block absolute -top-4 left-1/2 -translate-x-[140px] w-10 h-10 rotate-[-12deg] opacity-90" />
           <h2 className="font-display font-black text-4xl md:text-5xl lg:text-6xl uppercase leading-tight tracking-tight mb-6 break-words mx-auto">
             EXECUTIVOS
           </h2>
@@ -36,22 +75,16 @@ export default function Team() {
           {team.map((member) => (
             <div
               key={member.id}
-              className={`w-full max-w-[280px] bg-white p-3 pb-6 transform ${member.rotation} transition-transform duration-300`}
-              style={{
-                border: '1px solid #000000',
-                boxShadow: '4px 4px 0px #000000',
-                borderRadius: '0px'
-              }}
+              className={`w-full max-w-[280px] bg-white p-3 pb-6 rounded-2xl border border-neutral-200/60 shadow-[0_12px_30px_rgba(0,0,0,0.08)] transform ${member.rotation} transition-transform duration-300`}
             >
-              <div className="relative mb-4">
+              <div className="relative mb-4 rounded-xl overflow-hidden">
                 <img
                   src={member.photo}
                   alt={member.photoAlt}
                   className="w-full aspect-square object-cover object-top bg-gray-200"
                 />
-                <span 
-                  className="absolute bottom-3 left-3 z-10 font-mono text-[10px] font-bold tracking-widest px-2 py-1 bg-ato-green text-ato-black border border-ato-black uppercase"
-                  style={{ boxShadow: '2px 2px 0px #000000' }}
+                <span
+                  className="absolute bottom-3 left-3 z-10 font-mono text-[10px] font-bold tracking-widest px-2 py-1 bg-ato-green text-ato-black rounded-full uppercase shadow-[0_4px_12px_rgba(0,0,0,0.25)]"
                 >
                   {member.role}
                 </span>

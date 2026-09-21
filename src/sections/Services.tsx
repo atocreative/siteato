@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { StarBadge } from '@components/common/Stickers'
 
 interface SolutionCard {
   id: string
@@ -46,15 +47,52 @@ export default function Services() {
   }
 
   return (
-    <section id="solucoes" className="py-20 md:py-32 bg-ato-white relative overflow-hidden">
-      <div className="container px-4 md:px-6">
+    <section id="solucoes" className="py-20 md:py-32 bg-white relative overflow-hidden">
+      {/* Textura orgânica de fundo — Neo-Memphis, opacidade baixa, não interativa */}
+      <svg
+        className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.05] z-0"
+        viewBox="0 0 1200 800"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid slice"
+        aria-hidden="true"
+      >
+        <path
+          d="M-50 120 C 150 20, 350 220, 550 100 S 900 40, 1150 160"
+          stroke="#111111"
+          strokeWidth="10"
+          strokeLinecap="round"
+        />
+        <path
+          d="M-80 480 C 180 380, 320 620, 560 500 S 880 380, 1250 540"
+          stroke="#111111"
+          strokeWidth="8"
+          strokeLinecap="round"
+        />
+        <circle cx="180" cy="650" r="120" stroke="#111111" strokeWidth="6" />
+        <circle cx="1050" cy="140" r="90" stroke="#111111" strokeWidth="6" />
+        <path
+          d="M700 700 C 780 620, 900 720, 980 650 S 1120 600, 1220 680"
+          stroke="#111111"
+          strokeWidth="8"
+          strokeLinecap="round"
+        />
+        <path
+          d="M50 260 C 40 340, 140 380, 120 300 S 90 200, 50 260 Z"
+          stroke="#111111"
+          strokeWidth="6"
+        />
+      </svg>
+
+      <div className="relative z-10 container px-4 md:px-6">
         <motion.div
           initial="hidden"
           animate="visible"
           variants={containerVariants}
         >
           {/* Top: Full-width header */}
-          <motion.div className="mb-14 text-center flex flex-col items-center mx-auto" variants={itemVariants}>
+          <motion.div className="relative mb-14 text-center flex flex-col items-center mx-auto" variants={itemVariants}>
+            <StarBadge className="hidden md:block absolute -top-6 -right-2 w-12 h-12 rotate-[-6deg]" />
             <h2
               className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl uppercase leading-none tracking-tight mb-5"
               style={{ fontFamily: "'Archivo Black', sans-serif", fontWeight: 900 }}
@@ -77,11 +115,7 @@ export default function Services() {
                 <motion.div
                   key={sol.id}
                   variants={itemVariants}
-                  className="bg-white p-5 md:p-6 flex flex-col hover:translate-y-[-2px] transition-all duration-200"
-                  style={{
-                    border: '1px solid #000000',
-                    boxShadow: '4px 4px 0px #000000',
-                  }}
+                  className="bg-white p-5 md:p-6 flex flex-col rounded-2xl border border-neutral-200/60 shadow-[0_10px_28px_rgba(0,0,0,0.06)] hover:-translate-y-[3px] hover:shadow-[0_16px_36px_rgba(0,0,0,0.1)] transition-all duration-200"
                 >
                   <h3
                     className="text-base md:text-lg uppercase mb-2 tracking-tight leading-tight"
@@ -96,12 +130,12 @@ export default function Services() {
               ))}
             </motion.div>
 
-            {/* Right: ATO logo */}
+            {/* Right: Adesivo ATO */}
             <div className="hidden lg:flex items-center justify-center flex-shrink-0" style={{ width: '300px' }}>
               <img
-                src="/atoverde.svg"
+                src="/adesivo-ato.png"
                 alt="ATO. Soluções Digitais"
-                className="w-full max-w-[280px] object-contain select-none"
+                className="w-56 sm:w-64 lg:w-72 h-auto object-contain select-none rotate-[-3deg]"
               />
             </div>
           </div>

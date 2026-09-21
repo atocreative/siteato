@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import type { Testimonial } from '@types'
+import { WireRing } from '@components/common/Stickers'
 
 export default function Clients() {
   const logos = [
@@ -37,13 +38,14 @@ export default function Clients() {
   ]
 
   return (
-    <section id="clientes" className="text-ato-black py-20" style={{ backgroundColor: '#0CBF0C' }}>
+    <section id="clientes" className="relative text-ato-black py-20" style={{ backgroundColor: '#0CBF0C' }}>
       {/* Header */}
-      <div className="container mb-12">
-        <div className="text-center mb-12">
+      <div className="container mb-12 relative">
+        <div className="text-center mb-12 relative">
           <h2 className="font-display font-black text-4xl md:text-5xl lg:text-6xl uppercase leading-tight tracking-tight break-words mx-auto text-black">
             NOSSOS<br />CLIENTES
           </h2>
+          <WireRing className="hidden md:block absolute -top-6 right-0 w-14 h-14 rotate-[-6deg] opacity-70" color="#0D0D0D" />
         </div>
       </div>
 
@@ -73,12 +75,7 @@ export default function Clients() {
           {testimonials.map((testimonial) => (
             <motion.div
               key={testimonial.id}
-              className="p-8 bg-white"
-              style={{
-                border: '1px solid #000000',
-                boxShadow: '4px 4px 0px #000000',
-                borderRadius: '0px'
-              }}
+              className="p-8 bg-white rounded-2xl border border-neutral-200/60 shadow-[0_12px_30px_rgba(0,0,0,0.08)]"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

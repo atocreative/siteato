@@ -11,7 +11,7 @@ import {
   CTABanner,
   Footer
 } from '@sections/index'
-import { Analytics, CookieBanner, PrivacyPolicyPage, StructuredData } from '@components/common'
+import { Analytics, CookieBanner, PrivacyPolicyPage, StructuredData, TornEdge } from '@components/common'
 import { privacyPolicyPath } from '@lib/seoConfig'
 
 export default function App() {
@@ -46,11 +46,15 @@ export default function App() {
         <Navigation isFloating={isScrolled} />
         <Hero />
         <About />
+        <TornEdge topColor="#ffffff" bottomColor="#0CBF0C" variant={1} />
         <Clients />
+        <TornEdge topColor="#0CBF0C" bottomColor="#080808" variant={2} />
         <Steps />
+        <TornEdge topColor="#080808" bottomColor="#ffffff" variant={1} />
         <Services />
         <Team />
         {false && <Works />}
+        <TornEdge topColor="#ffffff" bottomColor="#050505" variant={2} />
         <CTABanner />
         <Footer />
       </main>

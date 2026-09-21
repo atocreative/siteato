@@ -1,71 +1,37 @@
+const links = [
+  { label: 'Instagram', href: 'https://instagram.com/ato.creative', external: true },
+  { label: 'WhatsApp', href: 'https://wa.me/556191995064', external: true },
+  { label: 'Contato', href: 'mailto:suporte.atocriative@gmail.com', external: false },
+]
+
 export default function Footer() {
-  const whatWeDo = [
-    'Sites e landing pages',
-    'Sistemas internos',
-    'Automações',
-    'IA para negócios',
-    'Posicionamento digital'
-  ]
-
   return (
-    <footer className="bg-ato-black text-ato-white">
-      <div className="ato-container">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border-b border-white/10">
+    <footer className="bg-black text-ato-white py-16 md:py-20">
+      <div className="flex flex-col items-center text-center mx-auto max-w-4xl px-4">
+        <img src="/atobranco.svg" alt="ATO." className="w-28 object-contain mb-6" />
 
-          {/* Col 1 — O que fazemos */}
-          <div className="py-8 md:pr-12 border-b md:border-b-0 md:border-r border-white/10">
-            <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-ato-green mb-5">O que fazemos</p>
-            <ul className="space-y-2">
-              {whatWeDo.map((item, i) => (
-                <li key={i} className="text-sm opacity-50 flex items-center gap-2">
-                  <span className="w-1 h-1 bg-ato-green rounded-full flex-shrink-0 opacity-60"></span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
+        <p className="text-sm md:text-base text-neutral-400 max-w-md mx-auto leading-relaxed mb-8">
+          Sistemas, sites e automações que transformam operação em faturamento real.
+        </p>
 
-          {/* Col 2 — Vamos conversar */}
-          <div className="py-8 md:pl-12">
-            <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-ato-green mb-5">Vamos conversar</p>
-            <div className="space-y-4">
-              <div>
-                <p className="font-mono text-[10px] opacity-30 uppercase tracking-widest mb-1">E-mail</p>
-                <a href="mailto:suporte.atocriative@gmail.com" className="font-display font-black text-sm hover:text-ato-green transition-colors break-all">
-                  suporte.atocriative@gmail.com
-                </a>
-              </div>
-              <div>
-                <p className="font-mono text-[10px] opacity-30 uppercase tracking-widest mb-1">WhatsApp</p>
-                <a href="https://wa.me/556191995064" target="_blank" rel="noreferrer" className="font-display font-black text-sm hover:text-ato-green transition-colors">
-                  Falar no WhatsApp →
-                </a>
-              </div>
-              <div>
-                <p className="font-mono text-[10px] opacity-30 uppercase tracking-widest mb-1">Instagram</p>
-                <a href="https://instagram.com/ato.creative" target="_blank" rel="noopener noreferrer" className="font-display font-black text-sm hover:text-ato-green transition-colors">
-                  @ato.creative →
-                </a>
-              </div>
-              <div className="pt-2 border-t border-white/10">
-                <p className="font-mono text-[10px] opacity-20 leading-relaxed">
-                  Estádio Nacional - Eixo Monumental - SRPN - 2º Andar. CEP: 70070-701
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div className="w-full max-w-xs h-px bg-white/10 mb-8" />
 
-        {/* Bottom bar */}
-        <div className="flex flex-col md:flex-row justify-center md:justify-between items-center text-center gap-6 md:gap-4 py-8 md:py-4 text-xs">
-          <img src="/atobranco.svg" alt="ATO." className="w-24 object-contain order-1" />
-          <span className="font-mono text-[10px] tracking-widest text-ato-green opacity-80 uppercase order-2 md:order-3" style={{ color: '#39FF14' }}>
-            Sistemas em movimento.
-          </span>
-          <span className="opacity-20 order-3 md:order-2">
-            © 2026 ATO. Soluções Digitais. Todos os direitos reservados.
-          </span>
-        </div>
+        <nav className="flex flex-wrap items-center justify-center gap-6 md:gap-8 mb-8">
+          {links.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              {...(link.external ? { target: '_blank', rel: 'noreferrer' } : {})}
+              className="text-sm text-neutral-400 hover:text-ato-green transition-colors"
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+
+        <p className="text-xs text-neutral-500">
+          © {new Date().getFullYear()} ATO. Todos os direitos reservados. Brasília, DF.
+        </p>
       </div>
     </footer>
   )

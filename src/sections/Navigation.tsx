@@ -37,8 +37,9 @@ export default function Navigation({ isFloating }: NavigationProps) {
           height: '60px',
           padding: '0 28px',
           background: '#0D0D0D',
-          border: '2px solid rgba(255,255,255,0.15)',
-          boxShadow: '6px 6px 0 #39FF14',
+          border: '1px solid rgba(255,255,255,0.12)',
+          borderRadius: '16px',
+          boxShadow: '0 12px 32px -10px rgba(57,255,20,0.35)',
         }}
       >
         {/* Logo */}
@@ -63,17 +64,17 @@ export default function Navigation({ isFloating }: NavigationProps) {
               href={WA}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[11px] font-bold uppercase tracking-[2px] px-5 py-[9px] bg-ato-green text-ato-black border-[1.5px] border-ato-black inline-block"
-              style={{ boxShadow: '3px 3px 0 #0D0D0D', transition: 'transform .1s, box-shadow .1s' }}
+              className="text-[11px] font-bold uppercase tracking-[2px] px-5 py-[9px] bg-ato-green text-ato-black rounded-full inline-block"
+              style={{ boxShadow: '0 8px 20px -6px rgba(57,255,20,0.6)', transition: 'transform .15s, box-shadow .15s' }}
               onMouseEnter={e => {
                 const el = e.currentTarget as HTMLElement
-                el.style.transform = 'translate(2px,2px)'
-                el.style.boxShadow = '1px 1px 0 #0D0D0D'
+                el.style.transform = 'translateY(2px)'
+                el.style.boxShadow = '0 4px 12px -4px rgba(57,255,20,0.5)'
               }}
               onMouseLeave={e => {
                 const el = e.currentTarget as HTMLElement
                 el.style.transform = ''
-                el.style.boxShadow = '3px 3px 0 #0D0D0D'
+                el.style.boxShadow = '0 8px 20px -6px rgba(57,255,20,0.6)'
               }}
             >
               Falar com a ATO.
@@ -107,9 +108,10 @@ export default function Navigation({ isFloating }: NavigationProps) {
               left: '20px',
               right: '20px',
               background: '#0D0D0D',
-              border: '2px solid rgba(255,255,255,0.15)',
-              borderTop: 'none',
+              border: '1px solid rgba(255,255,255,0.12)',
+              borderRadius: '16px',
               padding: '24px 28px',
+              boxShadow: '0 12px 32px -10px rgba(0,0,0,0.5)',
             }}
           >
             {navLinks.map(link => (
@@ -126,8 +128,8 @@ export default function Navigation({ isFloating }: NavigationProps) {
               href={WA}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[11px] font-bold uppercase tracking-[2px] px-5 py-3 bg-ato-green text-ato-black border-[1.5px] border-ato-black self-start mt-2"
-              style={{ boxShadow: '3px 3px 0 #0D0D0D' }}
+              className="text-[11px] font-bold uppercase tracking-[2px] px-5 py-3 bg-ato-green text-ato-black rounded-full self-start mt-2"
+              style={{ boxShadow: '0 8px 20px -6px rgba(57,255,20,0.6)' }}
               onClick={close}
             >
               Falar com a ATO.

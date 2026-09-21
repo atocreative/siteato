@@ -24,6 +24,10 @@ export default function CookieBanner() {
     setVisible(false)
   }
 
+  function handleDismiss() {
+    setVisible(false)
+  }
+
   if (!visible) return null
 
   return (
@@ -31,28 +35,30 @@ export default function CookieBanner() {
       role="dialog"
       aria-live="polite"
       aria-label="Aviso de cookies"
-      className="fixed bottom-0 left-0 right-0 z-[999] bg-ato-black text-ato-white"
-      style={{ borderTop: '2px solid #39FF14', boxShadow: '0 -6px 0 rgba(0,0,0,0.15)' }}
+      className="fixed bottom-4 left-4 z-50 max-w-[320px] sm:max-w-[340px] bg-black/90 backdrop-blur-md border border-neutral-800 rounded-xl p-3.5 shadow-2xl"
     >
-      <div className="ato-container flex flex-col md:flex-row items-center justify-between gap-4 py-4">
-        <p className="text-xs leading-relaxed opacity-80 text-center md:text-left">
-          Usamos cookies e tecnologias semelhantes para melhorar sua experiência, medir
-          desempenho e personalizar conteúdo, em conformidade com a LGPD. Saiba mais na{' '}
-          <a
-            href={privacyPolicyPath}
-            className="underline text-ato-green hover:opacity-80"
-          >
-            Política de Privacidade
-          </a>
-          .
-        </p>
+      <p className="text-[11px] leading-snug text-neutral-400 font-normal mb-3">
+        Usamos cookies para melhorar sua experiência e medir desempenho, em conformidade com a LGPD.{' '}
+        <a href={privacyPolicyPath} className="text-neutral-300 hover:text-white underline">
+          Política de Privacidade
+        </a>
+        .
+      </p>
+      <div className="flex items-center justify-between">
         <button
           type="button"
           onClick={handleAccept}
-          className="flex-shrink-0 text-[11px] font-bold uppercase tracking-[2px] px-6 py-3 bg-ato-green text-ato-black border-[1.5px] border-ato-black"
-          style={{ boxShadow: '3px 3px 0 #39FF14' }}
+          className="text-xs font-bold bg-[#39FF14] text-black px-3 py-1 rounded-md hover:bg-[#2BD60E] transition-colors"
         >
-          Entendi
+          Aceitar
+        </button>
+        <button
+          type="button"
+          onClick={handleDismiss}
+          aria-label="Fechar aviso de cookies"
+          className="text-neutral-500 hover:text-white text-xs px-2 py-1"
+        >
+          ×
         </button>
       </div>
     </div>
