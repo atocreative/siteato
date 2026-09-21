@@ -1,3 +1,7 @@
 export { default as Button } from './Button'
 export { default as Card } from './Card'
 export { default as NeoSticker } from './NeoSticker'
+export { default as CookieBanner } from './CookieBanner'
+export { default as Analytics } from './Analytics'
+export { default as StructuredData } from './StructuredData'
+export { default as PrivacyPolicyPage } from './PrivacyPolicyPage'

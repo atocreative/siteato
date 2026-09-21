@@ -11,9 +11,12 @@ import {
   CTABanner,
   Footer
 } from '@sections/index'
+import { Analytics, CookieBanner, PrivacyPolicyPage, StructuredData } from '@components/common'
+import { privacyPolicyPath } from '@lib/seoConfig'
 
 export default function App() {
   const [isScrolled, setIsScrolled] = useState(false)
+  const isPrivacyPolicyRoute = window.location.pathname === privacyPolicyPath
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,18 +27,34 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  if (isPrivacyPolicyRoute) {
+    return (
+      <>
+        <StructuredData />
+        <Analytics />
+        <PrivacyPolicyPage />
+        <CookieBanner />
+      </>
+    )
+  }
+
   return (
-    <main className="bg-ato-white text-ato-black overflow-x-hidden">
-      <Navigation isFloating={isScrolled} />
-      <Hero />
-      <About />
-      <Clients />
-      <Steps />
-      <Services />
-      <Team />
-      {false && <Works />}
-      <CTABanner />
-      <Footer />
-    </main>
+    <>
+      <StructuredData />
+      <Analytics />
+      <main className="bg-ato-white text-ato-black overflow-x-hidden">
+        <Navigation isFloating={isScrolled} />
+        <Hero />
+        <About />
+        <Clients />
+        <Steps />
+        <Services />
+        <Team />
+        {false && <Works />}
+        <CTABanner />
+        <Footer />
+      </main>
+      <CookieBanner />
+    </>
   )
 }
