@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { whatsappUrl } from '@lib/seoConfig'
+import { trackEvent } from '@lib/analytics'
 
 interface NavigationProps {
   isFloating: boolean
 }
 
-const WA = 'https://wa.me/556191995064'
+const WA = whatsappUrl
 
 export default function Navigation({ isFloating }: NavigationProps) {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -64,6 +66,7 @@ export default function Navigation({ isFloating }: NavigationProps) {
               href={WA}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackEvent('click_whatsapp', { location: 'nav_desktop' })}
               className="text-[11px] font-bold uppercase tracking-[2px] px-5 py-[9px] bg-ato-green text-ato-black rounded-full inline-block"
               style={{ boxShadow: '0 8px 20px -6px rgba(57,255,20,0.6)', transition: 'transform .15s, box-shadow .15s' }}
               onMouseEnter={e => {
@@ -130,7 +133,7 @@ export default function Navigation({ isFloating }: NavigationProps) {
               rel="noopener noreferrer"
               className="text-[11px] font-bold uppercase tracking-[2px] px-5 py-3 bg-ato-green text-ato-black rounded-full self-start mt-2"
               style={{ boxShadow: '0 8px 20px -6px rgba(57,255,20,0.6)' }}
-              onClick={close}
+              onClick={() => { trackEvent('click_whatsapp', { location: 'nav_mobile' }); close() }}
             >
               Falar com a ATO.
             </a>

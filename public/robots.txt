@@ -30,4 +30,4 @@ Allow: /
 User-agent: msnbot
 Allow: /
 
-Sitemap: https://atocreative.com.br/sitemap.xml
+Sitemap: https://atodev.com.br/sitemap.xml

@@ -33,7 +33,7 @@ export function loadSeoEnv(root = process.cwd()) {
   const get = (key, fallback = '') => process.env[key] ?? fileEnv[key] ?? fallback
 
   return {
-    siteUrl: get('VITE_SITE_URL', 'https://atocreative.com.br').replace(/\/$/, ''),
+    siteUrl: get('VITE_SITE_URL', 'https://atodev.com.br').replace(/\/$/, ''),
     siteName: get('VITE_SITE_NAME', 'ATO. Soluções em Tecnologia Digital'),
     siteDescription: get(
       'VITE_SITE_DESCRIPTION',

@@ -1,7 +1,11 @@
+import { instagramUrl, whatsappUrl, privacyPolicyPath } from '@lib/seoConfig'
+import { trackEvent } from '@lib/analytics'
+
 const links = [
-  { label: 'Instagram', href: 'https://instagram.com/ato.creative', external: true },
-  { label: 'WhatsApp', href: 'https://wa.me/556191995064', external: true },
-  { label: 'Contato', href: 'mailto:suporte.atocriative@gmail.com', external: false },
+  { label: 'Instagram', href: instagramUrl, external: true, event: 'click_instagram' },
+  { label: 'WhatsApp', href: whatsappUrl, external: true, event: 'click_whatsapp' },
+  { label: 'Contato', href: 'mailto:suporte.atocriative@gmail.com', external: false, event: 'click_email' },
+  { label: 'Política de Privacidade', href: privacyPolicyPath, external: false, event: null },
 ]
 
 export default function Footer() {
@@ -22,6 +26,7 @@ export default function Footer() {
               key={link.label}
               href={link.href}
               {...(link.external ? { target: '_blank', rel: 'noreferrer' } : {})}
+              onClick={() => link.event && trackEvent(link.event, { location: 'footer' })}
               className="text-sm text-neutral-400 hover:text-ato-green transition-colors"
             >
               {link.label}

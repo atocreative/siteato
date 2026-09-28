@@ -3,7 +3,7 @@
 
 const env = import.meta.env
 
-export const siteUrl = (env.VITE_SITE_URL || 'https://atocreative.com.br').replace(/\/$/, '')
+export const siteUrl = (env.VITE_SITE_URL || 'https://atodev.com.br').replace(/\/$/, '')
 export const siteName = env.VITE_SITE_NAME || 'ATO. Soluções em Tecnologia Digital'
 export const siteDescription =
   env.VITE_SITE_DESCRIPTION ||
@@ -12,6 +12,7 @@ export const siteDescription =
 export const contactEmail = env.VITE_CONTACT_EMAIL || 'suporte.atocriative@gmail.com'
 export const contactPhone = env.VITE_CONTACT_PHONE || '+55 61 99199-5064'
 export const whatsappUrl = 'https://wa.me/556191995064'
+export const instagramUrl = 'https://www.instagram.com/ato.vc'
 export const companyCnpj = env.VITE_COMPANY_CNPJ || '00.000.000/0001-00'
 
 export const locationCity = env.VITE_LOCATION_CITY || 'Brasília, DF'
@@ -19,7 +20,7 @@ export const locationAddress =
   env.VITE_LOCATION_ADDRESS ||
   'Estádio Nacional - Eixo Monumental - SRPN - 2º Andar, CEP 70070-701'
 
-export const ogImage = env.VITE_OG_IMAGE || '/mane.jpg'
+export const ogImage = env.VITE_OG_IMAGE || '/og-image.jpg'
 
 export const gaMeasurementId = env.VITE_GA_MEASUREMENT_ID || ''
 export const metaPixelId = env.VITE_META_PIXEL_ID || ''

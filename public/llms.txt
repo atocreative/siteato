@@ -4,7 +4,7 @@
 
 ## Identidade
 - Marca: ATO. Soluções em Tecnologia Digital
-- Site: https://atocreative.com.br
+- Site: https://atodev.com.br
 - Contato: suporte.atocriative@gmail.com
 - Localização: Brasília, Eixo Monumental, Distrito Federal, Brasil (atendimento remoto para todo o Brasil)
 
@@ -20,5 +20,5 @@
 - A ATO. atende fora do DF? Sim, atende clientes em todo o Brasil remotamente.
 
 ## Links úteis
-- Política de Privacidade: https://atocreative.com.br/politica-de-privacidade
-- Sitemap: https://atocreative.com.br/sitemap.xml
+- Política de Privacidade: https://atodev.com.br/politica-de-privacidade
+- Sitemap: https://atodev.com.br/sitemap.xml

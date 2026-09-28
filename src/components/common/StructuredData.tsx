@@ -7,6 +7,7 @@ import {
   locationAddress,
   areaServed,
   privacyPolicyPath,
+  instagramUrl,
 } from '@lib/seoConfig'
 
 const localBusiness = {
@@ -26,7 +27,7 @@ const localBusiness = {
     addressCountry: 'BR',
   },
   areaServed: areaServed.map((name) => ({ '@type': 'AdministrativeArea', name })),
-  sameAs: ['https://instagram.com/ato.creative'],
+  sameAs: [instagramUrl],
 }
 
 const faq = {

@@ -14,8 +14,8 @@ function seoHtmlPlugin(env: Record<string, string>): Plugin {
       'VITE_SITE_DESCRIPTION',
       'Agência de tecnologia em Brasília especializada em sites, sistemas internos, automações e IA para negócios.'
     ),
-    __SITE_URL__: get('VITE_SITE_URL', 'https://atocreative.com.br').replace(/\/$/, ''),
-    __OG_IMAGE__: get('VITE_OG_IMAGE', '/mane.jpg'),
+    __SITE_URL__: get('VITE_SITE_URL', 'https://atodev.com.br').replace(/\/$/, ''),
+    __OG_IMAGE__: get('VITE_OG_IMAGE', '/og-image.jpg'),
     __GOOGLE_SITE_VERIFICATION__: get('VITE_GOOGLE_SITE_VERIFICATION', ''),
     __BING_SITE_VERIFICATION__: get('VITE_BING_SITE_VERIFICATION', ''),
   }

@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import { Sparkle } from '@components/common/Stickers'
 import { StarsBackground } from '@sections/Hero'
+import { whatsappUrl } from '@lib/seoConfig'
+import { trackEvent } from '@lib/analytics'
 
 export default function CTABanner() {
   return (
@@ -38,9 +40,10 @@ export default function CTABanner() {
 
         <div className="flex items-center justify-center mt-8 z-10">
           <a
-            href="https://wa.me/556191995064"
+            href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackEvent('click_whatsapp', { location: 'cta_banner' })}
             className="bg-[#39FF14] text-black font-bold px-8 py-3.5 rounded-full shadow-[0_0_25px_rgba(57,255,20,0.4)] hover:shadow-[0_0_35px_rgba(57,255,20,0.6)] transition-all duration-300 hover:scale-[1.03] text-xs uppercase tracking-widest"
           >
             Quero saber mais
