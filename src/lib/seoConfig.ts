@@ -22,7 +22,6 @@ export const locationAddress =
 
 export const ogImage = env.VITE_OG_IMAGE || '/og-image.jpg'
 
-export const gaMeasurementId = env.VITE_GA_MEASUREMENT_ID || ''
 export const metaPixelId = env.VITE_META_PIXEL_ID || ''
 export const clarityId = env.VITE_CLARITY_ID || ''
 export const gtmId = env.VITE_GTM_ID || ''

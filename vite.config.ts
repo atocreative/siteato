@@ -18,12 +18,20 @@ function seoHtmlPlugin(env: Record<string, string>): Plugin {
     __OG_IMAGE__: get('VITE_OG_IMAGE', '/og-image.jpg'),
     __GOOGLE_SITE_VERIFICATION__: get('VITE_GOOGLE_SITE_VERIFICATION', ''),
     __BING_SITE_VERIFICATION__: get('VITE_BING_SITE_VERIFICATION', ''),
+    __GA_MEASUREMENT_ID__: get('VITE_GA_MEASUREMENT_ID', ''),
   }
 
   return {
     name: 'ato-seo-html',
     transformIndexHtml(html) {
       let output = html
+      // Remove o bloco inteiro do Google tag quando não há measurement ID configurado
+      if (!tokens.__GA_MEASUREMENT_ID__) {
+        output = output.replace(
+          /\s*<!-- Google tag \(gtag\.js\)[\s\S]*?<\/script>\s*<script>[\s\S]*?<\/script>\n?/,
+          '\n'
+        )
+      }
       for (const [token, value] of Object.entries(tokens)) {
         output = output.split(token).join(value)
       }

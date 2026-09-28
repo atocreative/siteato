@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { gaMeasurementId, metaPixelId, clarityId, gtmId } from '@lib/seoConfig'
+import { metaPixelId, clarityId, gtmId } from '@lib/seoConfig'
 
 function injectOnce(id: string, create: () => void) {
   if (document.getElementById(id)) return
@@ -11,23 +11,6 @@ export default function Analytics() {
     // Filtro de hostname: nunca dispara tracking em localhost/preview local
     const host = window.location.hostname
     if (host === 'localhost' || host === '127.0.0.1') return
-
-    if (gaMeasurementId) {
-      injectOnce('ga4-script', () => {
-        const script = document.createElement('script')
-        script.id = 'ga4-script'
-        script.async = true
-        script.src = `https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`
-        document.head.appendChild(script)
-
-        window.dataLayer = window.dataLayer || []
-        window.gtag = function gtag(...args: unknown[]) {
-          window.dataLayer!.push(args)
-        }
-        window.gtag('js', new Date())
-        window.gtag('config', gaMeasurementId)
-      })
-    }
 
     if (metaPixelId) {
       injectOnce('meta-pixel-script', () => {
