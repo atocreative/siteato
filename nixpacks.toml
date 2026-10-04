@@ -1,0 +1,8 @@
+# Railway (Nixpacks). O Next.js 16 exige Node >= 20.9; o padrão do Nixpacks era Node 18 e quebrava o build.
+[variables]
+NIXPACKS_NODE_VERSION = "22"
+NEXT_TELEMETRY_DISABLED = "1"
+
+[phases.install]
+# `npm ci` instala também as devDependencies mesmo com NODE_ENV=production definido no Railway
+cmds = ["npm ci --include=dev"]

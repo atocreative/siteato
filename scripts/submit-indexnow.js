@@ -1,10 +1,15 @@
 // Roda no "postbuild": notifica o IndexNow (Bing/Yandex/Seznam) a cada deploy.
 // Nunca falha o build — apenas registra avisos.
 
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || process.env.VITE_SITE_URL || 'https://atodev.com.br').replace(/\/$/, '')
-const indexNowKey = process.env.NEXT_PUBLIC_INDEXNOW_KEY || process.env.VITE_INDEXNOW_KEY || ''
+const read = (key) => (process.env[`NEXT_PUBLIC_${key}`] || process.env[`VITE_${key}`] || '').trim()
+const siteUrl = (read('SITE_URL') || 'https://atodev.com.br').replace(/\/$/, '')
+const indexNowKey = read('INDEXNOW_KEY')
 
 async function submit() {
+  if (process.env.SKIP_INDEXNOW) {
+    console.warn('[indexnow] SKIP_INDEXNOW definido — envio pulado.')
+    return
+  }
   if (!indexNowKey) {
     console.warn('[indexnow] NEXT_PUBLIC_INDEXNOW_KEY não definido — envio pulado.')
     return

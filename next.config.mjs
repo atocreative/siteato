@@ -1,15 +1,24 @@
-// Compatibilidade: aceita as variáveis legadas VITE_* (já configuradas no Railway) e
-// as expõe como NEXT_PUBLIC_*, que o Next inlina no bundle do cliente.
+// Compatibilidade: aceita as variáveis legadas VITE_* (já configuradas no Railway) e as expõe como
+// NEXT_PUBLIC_*, que o Next inlina no bundle do cliente. NEXT_PUBLIC_* tem prioridade sobre VITE_*.
+// Valores só com espaços (ex.: VITE_META_PIXEL_ID=" ") contam como vazios — antes ativariam trackers com ID inválido.
 const keys = [
   'SITE_URL', 'SITE_NAME', 'SITE_DESCRIPTION', 'OG_IMAGE',
   'CONTACT_EMAIL', 'CONTACT_PHONE', 'COMPANY_CNPJ',
   'LOCATION_CITY', 'LOCATION_ADDRESS',
   'META_PIXEL_ID', 'CLARITY_ID', 'GTM_ID', 'GA_MEASUREMENT_ID',
   'GOOGLE_SITE_VERIFICATION', 'BING_SITE_VERIFICATION', 'INDEXNOW_KEY',
+  'AJUSTES_FORM_URL',
 ]
-const env = Object.fromEntries(
-  keys.map((k) => [`NEXT_PUBLIC_${k}`, process.env[`NEXT_PUBLIC_${k}`] || process.env[`VITE_${k}`] || ''])
-)
+
+const pick = (key) => {
+  for (const name of [`NEXT_PUBLIC_${key}`, `VITE_${key}`]) {
+    const value = (process.env[name] ?? '').trim()
+    if (value) return value
+  }
+  return ''
+}
+
+const env = Object.fromEntries(keys.map((k) => [`NEXT_PUBLIC_${k}`, pick(k)]))
 
 const securityHeaders = [
   { key: 'X-Content-Type-Options', value: 'nosniff' },
@@ -28,6 +37,8 @@ const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   compress: true,
+  // Sem source maps no navegador: build mais rápido, menos memória e nenhum código-fonte exposto.
+  productionBrowserSourceMaps: false,
   images: { formats: ['image/avif', 'image/webp'] },
   async headers() {
     return [{ source: '/:path*', headers: securityHeaders }]
