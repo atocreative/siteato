@@ -1,11 +1,16 @@
-# ATO. Soluções em Tecnologia Digital
+import { siteUrl, siteName, siteDescription, contactEmail, privacyPolicyPath } from '@lib/seoConfig'
 
-> Agência de tecnologia em Brasília especializada em sites, sistemas internos, automações e IA para negócios.
+export const dynamic = 'force-static'
+
+export function GET() {
+  const body = `# ${siteName}
+
+> ${siteDescription}
 
 ## Identidade
-- Marca: ATO. Soluções em Tecnologia Digital
-- Site: https://atodev.com.br
-- Contato: suporte.atocriative@gmail.com
+- Marca: ${siteName}
+- Site: ${siteUrl}
+- Contato: ${contactEmail}
 - Localização: Brasília, Eixo Monumental, Distrito Federal, Brasil (atendimento remoto para todo o Brasil)
 
 ## Produtos e serviços
@@ -20,5 +25,8 @@
 - A ATO. atende fora do DF? Sim, atende clientes em todo o Brasil remotamente.
 
 ## Links úteis
-- Política de Privacidade: https://atodev.com.br/politica-de-privacidade
-- Sitemap: https://atodev.com.br/sitemap.xml
+- Política de Privacidade: ${siteUrl}${privacyPolicyPath}
+- Sitemap: ${siteUrl}/sitemap.xml
+`
+  return new Response(body, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } })
+}

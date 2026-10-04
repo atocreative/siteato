@@ -1,4 +1,7 @@
-import { motion } from 'framer-motion'
+'use client'
+
+import Image from 'next/image'
+import { m } from 'framer-motion'
 import { StarBadge } from '@components/common/Stickers'
 
 interface SolutionCard {
@@ -85,14 +88,14 @@ export default function Services() {
       </svg>
 
       <div className="relative z-10 container px-4 md:px-6">
-        <motion.div
+        <m.div
           initial="hidden"
           animate="visible"
           variants={containerVariants}
         >
           {/* Top: Full-width header */}
-          <motion.div className="relative mb-14 text-center flex flex-col items-center mx-auto" variants={itemVariants}>
-            <StarBadge className="hidden md:block absolute -top-6 -right-2 w-12 h-12 rotate-[-6deg]" />
+          <m.div className="relative mb-14 text-center flex flex-col items-center mx-auto" variants={itemVariants}>
+            <StarBadge className="hidden md:block absolute -top-6 -right-2 w-12 h-12 -rotate-6" />
             <h2
               className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl uppercase leading-none tracking-tight mb-5"
               style={{ fontFamily: "'Archivo Black', sans-serif", fontWeight: 900 }}
@@ -102,20 +105,20 @@ export default function Services() {
             <p className="text-sm opacity-50 max-w-2xl leading-relaxed mx-auto">
               A ATO não vende ferramentas isoladas. Entendemos sua operação e construímos a estrutura digital certa para o seu problema real.
             </p>
-          </motion.div>
+          </m.div>
 
           {/* Bottom: Cards left + Logo right */}
           <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
             {/* Left: Stacked horizontal cards */}
-            <motion.div
+            <m.div
               className="flex-1 flex flex-col gap-5 w-full"
               variants={containerVariants}
             >
               {solutions.map((sol) => (
-                <motion.div
+                <m.div
                   key={sol.id}
                   variants={itemVariants}
-                  className="bg-white p-5 md:p-6 flex flex-col rounded-2xl border border-neutral-200/60 shadow-[0_10px_28px_rgba(0,0,0,0.06)] hover:-translate-y-[3px] hover:shadow-[0_16px_36px_rgba(0,0,0,0.1)] transition-all duration-200"
+                  className="bg-white p-5 md:p-6 flex flex-col rounded-2xl border border-neutral-200/60 shadow-[0_10px_28px_rgba(0,0,0,0.06)] hover:translate-y-[-3px] hover:shadow-[0_16px_36px_rgba(0,0,0,0.1)] transition-all duration-200"
                 >
                   <h3
                     className="text-base md:text-lg uppercase mb-2 tracking-tight leading-tight"
@@ -126,20 +129,23 @@ export default function Services() {
                   <p className="text-sm leading-relaxed opacity-60">
                     {sol.description}
                   </p>
-                </motion.div>
+                </m.div>
               ))}
-            </motion.div>
+            </m.div>
 
             {/* Right: Adesivo ATO */}
-            <div className="hidden lg:flex items-center justify-center flex-shrink-0" style={{ width: '300px' }}>
-              <img
+            <div className="hidden lg:flex items-center justify-center shrink-0" style={{ width: '300px' }}>
+              <Image
                 src="/adesivo-ato.png"
-                alt="ATO. Soluções Digitais"
-                className="w-56 sm:w-64 lg:w-72 h-auto object-contain select-none rotate-[-3deg]"
+                width={1254}
+                height={1254}
+                sizes="288px"
+                alt="Adesivo com o símbolo da ATO., agência de tecnologia em Brasília que desenvolve sites, sistemas sob medida, automações e inteligência artificial para empresas"
+                className="w-56 sm:w-64 lg:w-72 h-auto object-contain select-none -rotate-3"
               />
             </div>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )

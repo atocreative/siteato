@@ -80,7 +80,7 @@ export default function TornEdge({ topColor, bottomColor, variant = 1, className
 
   return (
     <div
-      className={`relative z-20 w-full overflow-hidden leading-none pointer-events-none select-none -mt-[2px] -mb-[2px] ${className}`}
+      className={`relative z-20 w-full overflow-hidden leading-none pointer-events-none select-none mt-[-2px] mb-[-2px] ${className}`}
       aria-hidden="true"
     >
       <svg

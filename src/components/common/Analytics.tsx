@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect } from 'react'
 import { metaPixelId, clarityId, gtmId } from '@lib/seoConfig'
 

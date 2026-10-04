@@ -14,7 +14,7 @@ export default function Marquee() {
         {[...items, ...items].map((item, i) => (
           <div key={i} className="inline-flex items-center gap-10 px-10">
             <span className="font-display font-black text-2xl text-white tracking-wide">{item}</span>
-            <span className="w-1.5 h-1.5 bg-ato-green rounded-full flex-shrink-0"></span>
+            <span className="w-1.5 h-1.5 bg-ato-green rounded-full shrink-0"></span>
           </div>
         ))}
       </div>

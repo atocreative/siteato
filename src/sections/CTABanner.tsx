@@ -1,8 +1,9 @@
-import { motion } from 'framer-motion'
+'use client'
+
+import { m } from 'framer-motion'
 import { Sparkle } from '@components/common/Stickers'
 import { StarsBackground } from '@sections/Hero'
 import { whatsappUrl } from '@lib/seoConfig'
-import { trackEvent } from '@lib/analytics'
 
 export default function CTABanner() {
   return (
@@ -12,14 +13,14 @@ export default function CTABanner() {
     >
       <StarsBackground />
 
-      <motion.div
+      <m.div
         className="relative z-10 flex flex-col items-center max-w-3xl"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       >
-        <Sparkle className="hidden md:block absolute -top-8 -left-10 w-9 h-9 rotate-[-6deg] opacity-70" color="#ffffff" />
+        <Sparkle className="hidden md:block absolute -top-8 -left-10 w-9 h-9 -rotate-6 opacity-70" color="#ffffff" />
 
         <h2
           className="font-display font-black uppercase tracking-tight text-3xl sm:text-5xl lg:text-6xl max-w-4xl leading-[1.1] mb-4 text-white"
@@ -43,13 +44,12 @@ export default function CTABanner() {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => trackEvent('click_whatsapp', { location: 'cta_banner' })}
-            className="bg-[#39FF14] text-black font-bold px-8 py-3.5 rounded-full shadow-[0_0_25px_rgba(57,255,20,0.4)] hover:shadow-[0_0_35px_rgba(57,255,20,0.6)] transition-all duration-300 hover:scale-[1.03] text-xs uppercase tracking-widest"
+            className="inline-flex items-center justify-center min-h-[48px] bg-ato-green text-black font-bold px-8 py-3.5 rounded-full shadow-[0_0_25px_rgba(57,255,20,0.4)] hover:shadow-[0_0_35px_rgba(57,255,20,0.6)] transition-all duration-300 hover:scale-[1.03] text-xs uppercase tracking-widest"
           >
             Quero saber mais
           </a>
         </div>
-      </motion.div>
+      </m.div>
     </section>
   )
 }

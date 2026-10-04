@@ -1,22 +1,21 @@
-// Roda no "postbuild": notifica o IndexNow (Bing/Yandex/Seznam) automaticamente a cada
-// deploy, sem exigir nenhum passo manual. Nunca falha o build — apenas registra avisos.
+// Roda no "postbuild": notifica o IndexNow (Bing/Yandex/Seznam) a cada deploy.
+// Nunca falha o build — apenas registra avisos.
 
-import { loadSeoEnv } from './lib/env.js'
-
-const env = loadSeoEnv(process.cwd())
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || process.env.VITE_SITE_URL || 'https://atodev.com.br').replace(/\/$/, '')
+const indexNowKey = process.env.NEXT_PUBLIC_INDEXNOW_KEY || process.env.VITE_INDEXNOW_KEY || ''
 
 async function submit() {
-  if (!env.indexNowKey) {
-    console.warn('[indexnow] VITE_INDEXNOW_KEY não definido — envio pulado.')
+  if (!indexNowKey) {
+    console.warn('[indexnow] NEXT_PUBLIC_INDEXNOW_KEY não definido — envio pulado.')
     return
   }
 
-  const host = new URL(env.siteUrl).host
+  const host = new URL(siteUrl).host
   const payload = {
     host,
-    key: env.indexNowKey,
-    keyLocation: `${env.siteUrl}/${env.indexNowKey}.txt`,
-    urlList: [`${env.siteUrl}/`, `${env.siteUrl}/politica-de-privacidade`],
+    key: indexNowKey,
+    keyLocation: `${siteUrl}/${indexNowKey}.txt`,
+    urlList: [`${siteUrl}/`, `${siteUrl}/politica-de-privacidade`],
   }
 
   try {

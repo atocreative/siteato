@@ -1,4 +1,6 @@
-import { motion } from 'framer-motion'
+'use client'
+
+import { m } from 'framer-motion'
 
 interface NeoStickerProps {
   text: string
@@ -22,19 +24,24 @@ const sizeMap = {
 }
 
 const rotations = [-3, -6, 2, 5, -4, 3, -2]
-const randomRotation = () => rotations[Math.floor(Math.random() * rotations.length)]
+// Determinística a partir do texto: Math.random() geraria HTML diferente no servidor e no cliente.
+const rotationFor = (text: string) => {
+  let hash = 0
+  for (let i = 0; i < text.length; i++) hash = (hash * 31 + text.charCodeAt(i)) >>> 0
+  return rotations[hash % rotations.length]
+}
 
 export default function NeoSticker({ text, color, size = 'md', style }: NeoStickerProps) {
   return (
-    <motion.div
+    <m.div
       className={`${colorMap[color]} ${sizeMap[size]} border-4 border-ato-black font-display font-black font-bold uppercase tracking-widest text-ato-black shadow-brutal absolute z-10`}
       style={{
-        transform: `rotate(${randomRotation()}deg)`,
+        transform: `rotate(${rotationFor(text)}deg)`,
         ...style
       }}
       whileHover={{ scale: 1.08 }}
     >
       {text}
-    </motion.div>
+    </m.div>
   )
 }

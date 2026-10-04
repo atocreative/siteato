@@ -1,7 +1,8 @@
+'use client'
+
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 import { whatsappUrl } from '@lib/seoConfig'
-import { trackEvent } from '@lib/analytics'
 
 interface NavigationProps {
   isFloating: boolean
@@ -26,7 +27,7 @@ export default function Navigation({ isFloating }: NavigationProps) {
   return (
     <>
       {/* ── Floating nav bar ── */}
-      <motion.nav
+      <m.nav
         id="nav"
         initial={{ y: -100 }}
         animate={{ y: isFloating ? 0 : -100 }}
@@ -46,7 +47,7 @@ export default function Navigation({ isFloating }: NavigationProps) {
       >
         {/* Logo */}
         <a href="#">
-          <img src="/atobranco.svg" alt="ATO." className="w-auto object-contain cursor-pointer" style={{ maxHeight: '32px' }} />
+          <img src="/atobranco.svg" alt="Logotipo branco da ATO., agência de tecnologia em Brasília que cria sites, sistemas e automações com inteligência artificial para negócios" width={260} height={91} className="w-auto object-contain cursor-pointer" style={{ maxHeight: '32px' }} />
         </a>
 
         {/* Desktop links */}
@@ -66,7 +67,6 @@ export default function Navigation({ isFloating }: NavigationProps) {
               href={WA}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => trackEvent('click_whatsapp', { location: 'nav_desktop' })}
               className="text-[11px] font-bold uppercase tracking-[2px] px-5 py-[9px] bg-ato-green text-ato-black rounded-full inline-block"
               style={{ boxShadow: '0 8px 20px -6px rgba(57,255,20,0.6)', transition: 'transform .15s, box-shadow .15s' }}
               onMouseEnter={e => {
@@ -87,20 +87,21 @@ export default function Navigation({ isFloating }: NavigationProps) {
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden flex flex-col gap-[5px] cursor-pointer"
+          className="md:hidden flex flex-col justify-center items-center gap-[5px] cursor-pointer min-w-[48px] min-h-[48px] -mr-3"
           onClick={() => setMenuOpen(o => !o)}
-          aria-label="Abrir menu"
+          aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
+          aria-expanded={menuOpen}
         >
           <span className="block w-6 bg-white" style={{ height: '2.5px' }}></span>
           <span className="block w-6 bg-white" style={{ height: '2.5px' }}></span>
           <span className="block w-6 bg-white" style={{ height: '2.5px' }}></span>
         </button>
-      </motion.nav>
+      </m.nav>
 
       {/* ── Mobile dropdown ── */}
       <AnimatePresence>
         {menuOpen && isFloating && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
@@ -121,7 +122,7 @@ export default function Navigation({ isFloating }: NavigationProps) {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-bold uppercase tracking-[2px] text-white/80 hover:text-ato-green transition-colors"
+                className="flex items-center min-h-[48px] text-sm font-bold uppercase tracking-[2px] text-white/80 hover:text-ato-green transition-colors"
                 onClick={close}
               >
                 {link.label}
@@ -131,13 +132,13 @@ export default function Navigation({ isFloating }: NavigationProps) {
               href={WA}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[11px] font-bold uppercase tracking-[2px] px-5 py-3 bg-ato-green text-ato-black rounded-full self-start mt-2"
+              className="inline-flex items-center min-h-[48px] text-[11px] font-bold uppercase tracking-[2px] px-5 py-3 bg-ato-green text-ato-black rounded-full self-start mt-2"
               style={{ boxShadow: '0 8px 20px -6px rgba(57,255,20,0.6)' }}
-              onClick={() => { trackEvent('click_whatsapp', { location: 'nav_mobile' }); close() }}
+              onClick={close}
             >
               Falar com a ATO.
             </a>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </>

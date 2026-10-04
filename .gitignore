@@ -55,3 +55,7 @@ pnpm-debug.log*
 # OS
 Thumbs.db
 .env.development.local
+# Next.js
+.next/
+out/
+next-env.d.ts

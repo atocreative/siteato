@@ -1,43 +1,114 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import 'tailwindcss';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@theme {
+  --color-ato-green: #39ff14;
+  --color-ato-green-dark: #2bd60e;
+  --color-ato-glow: #0c3a14;
+  --color-ato-black: #0d0d0d;
+  --color-ato-white: #f4efe4;
+  --color-ato-off: #eceae5;
+  --color-ato-yellow: #ffe500;
+  --color-ato-orange: #ff6b1a;
+  --color-ato-blue: #3b6cf0;
+  --color-ato-purple: #5c3bf0;
+  --color-ato-red: #e03030;
 
-html {
-  scroll-behavior: smooth;
+  --font-sans: var(--font-space-grotesk), Space Grotesk, sans-serif;
+  --font-display: var(--font-archivo-black), Archivo Black, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), JetBrains Mono, monospace;
+
+  --text-display: clamp(58px, 10vw, 155px);
+
+  --spacing-section: 80px;
+
+  --border-width-brutal: 2.5px;
+
+  --shadow-brutal: 5px 5px 0 #0d0d0d;
+  --shadow-brutal-sm: 3px 3px 0 #0d0d0d;
+  --shadow-brutal-lg: 8px 8px 0 #0d0d0d;
+
+  --animate-scroll-marquee: scroll 20s linear infinite;
+  --animate-scroll-marquee-fast: scroll 22s linear infinite;
+  --animate-scroll-marquee-reverse: scroll-reverse 24s linear infinite;
+  --animate-ring-spin: ring-spin 24s linear infinite;
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes scroll-reverse {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  @keyframes ring-spin {
+    to {
+      transform: rotateY(-360deg);
+    }
+  }
 }
 
-body {
-  font-family: 'Space Grotesk', sans-serif;
-  @apply font-sans;
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
 }
 
-h1, h2, h3 {
-  font-family: 'Archivo Black', sans-serif;
-  font-weight: 900;
+/* Regras globais dentro de @layer base: no Tailwind v4 CSS fora de camada vence qualquer
+   utility (ex.: `span { font-family }` anularia `font-display`). Em base, as utilities sempre vencem. */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-archivo-black), 'Archivo Black', sans-serif;
+    font-weight: 900;
+  }
+
+  p, a, button, li, span {
+    font-family: var(--font-space-grotesk), 'Space Grotesk', sans-serif;
+  }
+
+  .mono {
+    font-family: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
+  }
 }
 
-p, a, button, li, span {
-  font-family: 'Space Grotesk', sans-serif;
-}
-
-.font-mono, .mono {
-  font-family: 'JetBrains Mono', monospace;
-}
-
-/* Trava de layout — container 1024px no desktop, fluido no mobile */
-.container {
+/* Trava de layout — container 1024px no desktop, fluido no mobile.
+   @utility substitui a utility `container` do Tailwind (CSS solto perderia/ganharia na ordem errada). */
+@utility container {
   width: 100%;
   max-width: 1024px;
-  margin: 0 auto;
-  padding: 0 1rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
   position: relative;
-}
 
-@media (min-width: 1024px) {
-  .container {
-    padding: 0;
+  @media (min-width: 1024px) {
+    padding-inline: 0;
   }
 }
 
@@ -59,19 +130,37 @@ p, a, button, li, span {
 }
 
 /* Container padrão ATO — centraliza conteúdo em max 1200px */
-.ato-container {
+@utility ato-container {
   max-width: 1200px;
-  margin: 0 auto;
+  margin-inline: auto;
   position: relative;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
+  padding-inline: 1.5rem;
 
-@media (min-width: 640px) {
-  .ato-container {
-    padding-left: 2rem;
-    padding-right: 2rem;
+  @media (min-width: 640px) {
+    padding-inline: 2rem;
   }
 }
 
-/* Garante que #0F0F0F legado não apareça — todos os border-brutal usam #0D0D0D via tailwind.config */
+/* Entrada do headline do Hero via CSS puro: o texto já nasce no HTML do servidor
+   (não espera hidratação do React), o que não atrasa o LCP. */
+@keyframes ato-fade-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ato-fade-up {
+  animation: ato-fade-up 0.6s ease-out both;
+}
+
+/* Acessibilidade (WCAG 2.3.3): respeita quem pede menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Banner de cookies: some antes da primeira pintura para quem já aceitou (sem flash) */
+.consent-granted .cookie-banner { display: none; }

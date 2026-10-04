@@ -1,4 +1,6 @@
-import { motion } from 'framer-motion'
+'use client'
+
+import { m } from 'framer-motion'
 import Button from '@components/common/Button'
 import type { Work } from '@types'
 
@@ -83,7 +85,7 @@ export default function Works() {
             }
 
             return (
-              <motion.div
+              <m.div
                 key={work.id}
                 className={`${colSpan} border-brutal border-ato-black overflow-hidden group cursor-pointer hover:bg-opacity-50`}
                 whileHover={{ opacity: 0.85 }}
@@ -101,7 +103,7 @@ export default function Works() {
                   <h3 className="font-display font-black text-lg uppercase tracking-tight">{work.title}</h3>
                   <p className="text-xs opacity-40 mt-1">{work.client}</p>
                 </div>
-              </motion.div>
+              </m.div>
             )
           })}
         </div>

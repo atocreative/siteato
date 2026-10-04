@@ -1,4 +1,6 @@
-import { motion } from 'framer-motion'
+'use client'
+
+import { m } from 'framer-motion'
 import { WireGlobe } from '@components/common/Stickers'
 
 interface Step {
@@ -10,7 +12,7 @@ interface Step {
 function StepCard({ step, align }: { step: Step; align: 'left' | 'right' }) {
   return (
     <div className={align === 'right' ? 'text-right' : 'text-left'}>
-      <span className="inline-block text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-[#39FF14] text-[#39FF14] mb-2">
+      <span className="inline-block text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-ato-green text-ato-green mb-2">
         Etapa {step.number}
       </span>
       <h3 className="font-display font-black text-lg uppercase tracking-tight mb-2">{step.title}</h3>
@@ -45,9 +47,9 @@ export default function Steps() {
 
       <div className="container relative z-10">
         <div className="relative mb-16 md:mb-20 text-center">
-          <WireGlobe className="hidden md:block absolute -top-8 right-2 w-16 h-16 rotate-[-6deg] opacity-60" color="#ffffff" />
+          <WireGlobe className="hidden md:block absolute -top-8 right-2 w-16 h-16 -rotate-6 opacity-60" color="#ffffff" />
           <h2 className="font-display font-black tracking-tight text-3xl sm:text-5xl uppercase text-white mb-4">
-            DE IDEIA A <span className="text-[#39FF14]">ESTRUTURA</span>
+            DE IDEIA A <span className="text-ato-green">ESTRUTURA</span>
           </h2>
           <p className="text-sm opacity-40 max-w-md leading-relaxed mx-auto">
             Um método direto para tirar sua operação do improviso e construir soluções digitais que funcionam no mundo real.
@@ -64,7 +66,7 @@ export default function Steps() {
               const isRight = i % 2 === 1
 
               return (
-                <motion.div
+                <m.div
                   key={i}
                   className="relative"
                   initial={{ opacity: 0, y: 20 }}
@@ -73,7 +75,7 @@ export default function Steps() {
                   transition={{ duration: 0.4, delay: i * 0.08 }}
                 >
                   {/* Nó + conteúdo — mobile */}
-                  <div className="md:hidden absolute left-6 top-0 -translate-x-1/2 w-12 h-12 rounded-full border-2 border-[#39FF14] bg-black text-[#39FF14] font-black flex items-center justify-center text-lg z-10">
+                  <div className="md:hidden absolute left-6 top-0 -translate-x-1/2 w-12 h-12 rounded-full border-2 border-ato-green bg-black text-ato-green font-black flex items-center justify-center text-lg z-10">
                     {step.number}
                   </div>
                   <div className="md:hidden pl-16 text-left">
@@ -86,7 +88,7 @@ export default function Steps() {
 
                     <div className="flex items-center">
                       <div className={`h-0 flex-1 border-t border-dashed border-neutral-700 ${isRight ? 'opacity-0' : ''}`} />
-                      <div className="w-12 h-12 rounded-full border-2 border-[#39FF14] bg-black text-[#39FF14] font-black flex items-center justify-center text-lg z-10 flex-shrink-0">
+                      <div className="w-12 h-12 rounded-full border-2 border-ato-green bg-black text-ato-green font-black flex items-center justify-center text-lg z-10 shrink-0">
                         {step.number}
                       </div>
                       <div className={`h-0 flex-1 border-t border-dashed border-neutral-700 ${!isRight ? 'opacity-0' : ''}`} />
@@ -94,7 +96,7 @@ export default function Steps() {
 
                     <div>{isRight && <StepCard step={step} align="left" />}</div>
                   </div>
-                </motion.div>
+                </m.div>
               )
             })}
           </div>

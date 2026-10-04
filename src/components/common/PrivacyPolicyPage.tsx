@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import Link from 'next/link'
 import {
   siteName,
   siteUrl,
@@ -9,16 +9,12 @@ import {
 } from '@lib/seoConfig'
 
 export default function PrivacyPolicyPage() {
-  useEffect(() => {
-    document.title = `Política de Privacidade — ${siteName}`
-  }, [])
-
   return (
     <main className="bg-ato-white text-ato-black min-h-screen py-16">
       <div className="ato-container max-w-3xl mx-auto">
-        <a href="/" className="text-xs font-bold uppercase tracking-widest text-ato-green hover:opacity-70">
+        <Link href="/" className="inline-flex items-center min-h-[48px] text-xs font-bold uppercase tracking-widest text-ato-green hover:opacity-70">
           ← Voltar para o site
-        </a>
+        </Link>
 
         <h1 className="font-display font-black text-3xl md:text-5xl uppercase mt-6 mb-8">
           Política de Privacidade

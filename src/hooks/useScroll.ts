@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 
 export function useScroll(threshold: number = 0.7) {

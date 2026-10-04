@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { Sparkle } from '@components/common/Stickers'
 
 export default function About() {
@@ -44,8 +45,11 @@ export default function About() {
 
           {/* Coluna esquerda — Título sobre o elemento 3D (backdrop) */}
           <div className="lg:col-span-5 relative overflow-visible flex items-center justify-center w-full min-h-[380px] lg:min-h-[440px]">
-            <img
+            <Image
               src="/mane.png"
+              width={1024}
+              height={1024}
+              sizes="(min-width: 1280px) 520px, (min-width: 1024px) 480px, 440px"
               alt=""
               aria-hidden="true"
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none w-[380px] sm:w-[440px] lg:w-[480px] xl:w-[520px] max-w-full h-auto object-contain opacity-90"
@@ -56,11 +60,11 @@ export default function About() {
             >
               <span className="font-sans text-neutral-950">SOMOS A</span>
               <br />
-              <span className="font-display text-[#39FF14]">ATO</span>
+              <span className="font-display text-ato-green">ATO</span>
               <span className="font-display text-neutral-950">.</span>
             </h2>
 
-            <Sparkle className="hidden md:block absolute -top-2 right-6 w-9 h-9 rotate-[12deg] opacity-80 z-10" />
+            <Sparkle className="hidden md:block absolute -top-2 right-6 w-9 h-9 rotate-12 opacity-80 z-10" />
           </div>
 
           {/* Coluna direita — Corpo de texto */}

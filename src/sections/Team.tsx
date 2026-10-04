@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { Daisy } from '@components/common/Stickers'
 
 export default function Team() {
@@ -7,16 +8,16 @@ export default function Team() {
       role: 'CEO & Co-founder',
       name: 'João Oliveira',
       photo: '/joao.png',
-      photoAlt: 'João Gabriel - CEO da ATO',
+      photoAlt: 'Retrato de João Oliveira, CEO e co-fundador da ATO., agência de tecnologia de Brasília especializada em posicionamento digital, sites e automações para negócios',
       bio: 'Administrador, graduando em Ciência de Dados e estrategista de marketing. Especialista em posicionamento digital e gestão de pessoas com foco em cultura organizacional. Une dados, mercado e estética com um único objetivo: transformar a presença digital de nossos clientes em um motor real de faturamento e crescimento.',
-      rotation: 'rotate-0 md:-rotate-[1.5deg] md:hover:rotate-0',
+      rotation: 'rotate-0 md:rotate-[-1.5deg] md:hover:rotate-0',
     },
     {
       id: '2',
       role: 'CTO & Co-founder',
       name: 'Caio Vilela',
       photo: '/caio.png',
-      photoAlt: 'Caio Vilela - CTO da ATO',
+      photoAlt: 'Retrato de Caio Vilela, CTO e co-fundador da ATO., engenheiro de inteligência artificial responsável por sistemas, automações e sites de alta performance em Brasília',
       bio: 'Desenvolvedor e especialista em Engenharia de IA. Responsável por arquitetar os sistemas e ferramentas da empresa, une engenharia e sensibilidade de design para transformar estratégias de mercado em soluções tecnológicas focadas em performance, automação e crescimento real.',
       rotation: 'rotate-0 md:rotate-[1.5deg] md:hover:rotate-0',
     }
@@ -62,8 +63,8 @@ export default function Team() {
 
       <div className="relative z-10 container px-4 md:px-6">
         <div className="relative text-center mb-16">
-          <Daisy className="hidden md:block absolute -top-4 left-1/2 -translate-x-[140px] w-10 h-10 rotate-[-12deg] opacity-90" />
-          <h2 className="font-display font-black text-4xl md:text-5xl lg:text-6xl uppercase leading-tight tracking-tight mb-6 break-words mx-auto">
+          <Daisy className="hidden md:block absolute -top-4 left-1/2 translate-x-[-140px] w-10 h-10 -rotate-12 opacity-90" />
+          <h2 className="font-display font-black text-4xl md:text-5xl lg:text-6xl uppercase leading-tight tracking-tight mb-6 wrap-break-word mx-auto">
             EXECUTIVOS
           </h2>
           <p className="text-sm leading-relaxed opacity-60 max-w-md mx-auto font-bold uppercase tracking-widest">
@@ -78,9 +79,12 @@ export default function Team() {
               className={`w-full max-w-[280px] bg-white p-3 pb-6 rounded-2xl border border-neutral-200/60 shadow-[0_12px_30px_rgba(0,0,0,0.08)] transform ${member.rotation} transition-transform duration-300`}
             >
               <div className="relative mb-4 rounded-xl overflow-hidden">
-                <img
+                <Image
                   src={member.photo}
                   alt={member.photoAlt}
+                  width={940}
+                  height={940}
+                  sizes="(min-width: 1024px) 480px, 90vw"
                   className="w-full aspect-square object-cover object-top bg-gray-200"
                 />
                 <span

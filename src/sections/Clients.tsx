@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { WireRing } from '@components/common/Stickers'
 
 export default function Clients() {
@@ -27,10 +28,10 @@ export default function Clients() {
       {/* Header */}
       <div className="container mb-12 relative">
         <div className="text-center mb-12 relative">
-          <h2 className="font-display font-black text-4xl md:text-5xl lg:text-6xl uppercase leading-tight tracking-tight break-words mx-auto text-black">
+          <h2 className="font-display font-black text-4xl md:text-5xl lg:text-6xl uppercase leading-tight tracking-tight wrap-break-word mx-auto text-black">
             NOSSOS<br />CLIENTES
           </h2>
-          <WireRing className="hidden md:block absolute -top-6 right-0 w-14 h-14 rotate-[-6deg] opacity-70" color="#0D0D0D" />
+          <WireRing className="hidden md:block absolute -top-6 right-0 w-14 h-14 -rotate-6 opacity-70" color="#0D0D0D" />
         </div>
       </div>
 
@@ -46,12 +47,14 @@ export default function Clients() {
           {[...logosRow1, ...logosRow1, ...logosRow1, ...logosRow1].map((logo, i) => (
             <div
               key={i}
-              className="inline-flex items-center justify-center flex-shrink-0 px-10"
+              className="inline-flex items-center justify-center shrink-0 px-10"
               style={{ height: '120px' }}
             >
-              <img
+              <Image
                 src={logo.src}
                 alt={logo.alt}
+                width={150}
+                height={70}
                 className="object-contain grayscale opacity-75 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
                 style={{ width: '150px', height: '70px' }}
               />
@@ -62,12 +65,14 @@ export default function Clients() {
           {[...logosRow2, ...logosRow2, ...logosRow2, ...logosRow2].map((logo, i) => (
             <div
               key={i}
-              className="inline-flex items-center justify-center flex-shrink-0 px-10"
+              className="inline-flex items-center justify-center shrink-0 px-10"
               style={{ height: '120px' }}
             >
-              <img
+              <Image
                 src={logo.src}
                 alt={logo.alt}
+                width={150}
+                height={70}
                 className="object-contain grayscale opacity-75 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
                 style={{ width: '150px', height: '70px' }}
               />
