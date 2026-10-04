@@ -6,7 +6,7 @@ import { spawn, spawnSync } from 'node:child_process'
 
 const root = process.cwd()
 const port = process.env.VERIFY_PORT || '3199'
-const url = `http://127.0.0.1:${port}/`
+const url = `http://127.0.0.1:${port}/${(process.env.VERIFY_PATH || '').replace(/^\/+/, '')}`
 const out = path.join(root, '.next', 'lh-verify.json')
 const isWin = process.platform === 'win32'
 let failures = 0

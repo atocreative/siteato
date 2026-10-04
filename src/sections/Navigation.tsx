@@ -2,13 +2,14 @@
 
 import { useState } from 'react'
 import { m, AnimatePresence } from 'framer-motion'
-import { whatsappUrl } from '@lib/seoConfig'
+import Link from 'next/link'
+import { contactPagePath } from '@lib/seoConfig'
 
 interface NavigationProps {
   isFloating: boolean
 }
 
-const WA = whatsappUrl
+const CONTACT = contactPagePath
 
 export default function Navigation({ isFloating }: NavigationProps) {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -19,7 +20,7 @@ export default function Navigation({ isFloating }: NavigationProps) {
     { href: '#transformacao', label: 'Transformação' },
     { href: '#solucoes', label: 'Soluções' },
     { href: '#equipe', label: 'Equipe' },
-    { href: '#contato', label: 'Contato' },
+    { href: CONTACT, label: 'Contato' },
   ]
 
   const close = () => setMenuOpen(false)
@@ -63,10 +64,10 @@ export default function Navigation({ isFloating }: NavigationProps) {
             </li>
           ))}
           <li>
-            <a
-              href={WA}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href={CONTACT}
+              data-ga-click
+              data-ga-label="Falar com a ATO (menu desktop)"
               className="text-[11px] font-bold uppercase tracking-[2px] px-5 py-[9px] bg-ato-green text-ato-black rounded-full inline-block"
               style={{ boxShadow: '0 8px 20px -6px rgba(57,255,20,0.6)', transition: 'transform .15s, box-shadow .15s' }}
               onMouseEnter={e => {
@@ -81,7 +82,7 @@ export default function Navigation({ isFloating }: NavigationProps) {
               }}
             >
               Falar com a ATO.
-            </a>
+            </Link>
           </li>
         </ul>
 
@@ -128,16 +129,16 @@ export default function Navigation({ isFloating }: NavigationProps) {
                 {link.label}
               </a>
             ))}
-            <a
-              href={WA}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href={CONTACT}
+              data-ga-click
+              data-ga-label="Falar com a ATO (menu mobile)"
               className="inline-flex items-center min-h-[48px] text-[11px] font-bold uppercase tracking-[2px] px-5 py-3 bg-ato-green text-ato-black rounded-full self-start mt-2"
               style={{ boxShadow: '0 8px 20px -6px rgba(57,255,20,0.6)' }}
               onClick={close}
             >
               Falar com a ATO.
-            </a>
+            </Link>
           </m.div>
         )}
       </AnimatePresence>

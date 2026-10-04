@@ -15,7 +15,10 @@
     "verify:qa": "node scripts/verify-qa.mjs",
     "verify:a11y": "node scripts/verify-a11y.mjs",
     "verify:deps": "node scripts/verify-deps.mjs",
-    "verify:ga4": "node scripts/verify-ga4.mjs && node scripts/e2e-ga4.mjs"
+    "verify:ga4": "node scripts/verify-ga4.mjs && node scripts/e2e-ga4.mjs",
+    "verify:funnel": "node scripts/verify-funnel.mjs",
+    "verify:briefing": "node scripts/verify-briefing.mjs",
+    "verify:ajustes": "node scripts/verify-ajustes.mjs"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.3.3",

@@ -15,7 +15,7 @@ async function submit() {
     host,
     key: indexNowKey,
     keyLocation: `${siteUrl}/${indexNowKey}.txt`,
-    urlList: [`${siteUrl}/`, `${siteUrl}/politica-de-privacidade`],
+    urlList: [`${siteUrl}/`, `${siteUrl}/contato`, `${siteUrl}/politica-de-privacidade`],
   }
 
   try {

@@ -1,4 +1,4 @@
-import { siteUrl, privacyPolicyPath, indexNowKey } from '@lib/seoConfig'
+import { siteUrl, privacyPolicyPath, contactPagePath, indexNowKey } from '@lib/seoConfig'
 
 // POST /api/indexnow — avisa o IndexNow (Bing, Yandex, Seznam) das URLs principais.
 // Sem entrada do cliente: a lista de URLs é fixa, então o endpoint não pode ser usado para spam.
@@ -13,7 +13,7 @@ export async function POST() {
     host: new URL(siteUrl).host,
     key: indexNowKey,
     keyLocation: `${siteUrl}/${indexNowKey}.txt`,
-    urlList: [`${siteUrl}/`, `${siteUrl}${privacyPolicyPath}`],
+    urlList: [`${siteUrl}/`, `${siteUrl}${contactPagePath}`, `${siteUrl}${privacyPolicyPath}`],
   }
 
   try {

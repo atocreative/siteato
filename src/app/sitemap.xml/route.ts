@@ -1,4 +1,4 @@
-import { siteUrl, privacyPolicyPath } from '@lib/seoConfig'
+import { siteUrl, privacyPolicyPath, contactPagePath } from '@lib/seoConfig'
 import { allSeoImages } from '@lib/seoImages'
 
 // Route Handler (e não app/sitemap.ts) porque o MetadataRoute.Sitemap do Next só aceita a URL
@@ -30,6 +30,12 @@ export function GET() {
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
 ${images}
+  </url>
+  <url>
+    <loc>${siteUrl}${contactPagePath}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>${siteUrl}${privacyPolicyPath}</loc>

@@ -10,7 +10,8 @@ export const siteDescription =
 
 export const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'suporte.atocriative@gmail.com'
 export const contactPhone = process.env.NEXT_PUBLIC_CONTACT_PHONE || '+55 61 99199-5064'
-export const whatsappUrl = `https://wa.me/556191995064?text=${encodeURIComponent(
+export const whatsappNumber = '5561991995064'
+export const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
   'Olá! Vim pelo site da ATO. e quero saber mais sobre os serviços.'
 )}`
 export const instagramUrl = 'https://www.instagram.com/ato.vc'
@@ -46,3 +47,10 @@ export const areaServed = [
 ]
 
 export const privacyPolicyPath = '/politica-de-privacidade'
+
+export const contactPagePath = '/contato'
+export const briefingPagePath = '/briefing'
+export const ajustesPagePath = '/ajustes'
+
+// Endpoint (Formspree) que recebe os ajustes finais por e-mail — o mesmo da página de ajustes anterior.
+export const ajustesFormUrl = process.env.NEXT_PUBLIC_AJUSTES_FORM_URL || 'https://formspree.io/f/xdekygdv'

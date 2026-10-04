@@ -1,4 +1,4 @@
-import { siteUrl, siteName, siteDescription, contactEmail, privacyPolicyPath } from '@lib/seoConfig'
+import { siteUrl, siteName, siteDescription, contactEmail, privacyPolicyPath, contactPagePath } from '@lib/seoConfig'
 
 export const dynamic = 'force-static'
 
@@ -25,6 +25,7 @@ export function GET() {
 - A ATO. atende fora do DF? Sim, atende clientes em todo o Brasil remotamente.
 
 ## Links úteis
+- Fale com a ATO. (orçamento): ${siteUrl}${contactPagePath}
 - Política de Privacidade: ${siteUrl}${privacyPolicyPath}
 - Sitemap: ${siteUrl}/sitemap.xml
 `

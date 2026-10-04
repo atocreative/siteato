@@ -3,7 +3,8 @@
 import { m } from 'framer-motion'
 import { Sparkle } from '@components/common/Stickers'
 import { StarsBackground } from '@sections/Hero'
-import { whatsappUrl } from '@lib/seoConfig'
+import Link from 'next/link'
+import { contactPagePath } from '@lib/seoConfig'
 
 export default function CTABanner() {
   return (
@@ -40,14 +41,14 @@ export default function CTABanner() {
         </h2>
 
         <div className="flex items-center justify-center mt-8 z-10">
-          <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href={contactPagePath}
+            data-ga-click
+            data-ga-label="Quero saber mais (banner final)"
             className="inline-flex items-center justify-center min-h-[48px] bg-ato-green text-black font-bold px-8 py-3.5 rounded-full shadow-[0_0_25px_rgba(57,255,20,0.4)] hover:shadow-[0_0_35px_rgba(57,255,20,0.6)] transition-all duration-300 hover:scale-[1.03] text-xs uppercase tracking-widest"
           >
             Quero saber mais
-          </a>
+          </Link>
         </div>
       </m.div>
     </section>

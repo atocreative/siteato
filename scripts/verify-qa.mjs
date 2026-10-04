@@ -33,9 +33,13 @@ check('links externos com target=_blank têm rel="noopener noreferrer"', badTarg
 
 // 2. WhatsApp: wa.me/55 com texto codificado, sem URLs hardcoded fora do seoConfig
 const seo = sources.find((x) => x.f.endsWith('seoConfig.ts'))?.s ?? ''
-check('whatsappUrl usa https://wa.me/55 com encodeURIComponent', /https:\/\/wa\.me\/55\d+\?text=\$\{encodeURIComponent\(/.test(seo))
-const hardcoded = sources.filter((x) => !x.f.endsWith('seoConfig.ts') && /wa\.me\//.test(x.s))
-check('nenhum link wa.me hardcoded fora do seoConfig', hardcoded.length === 0)
+check('whatsappNumber começa com 55 (Brasil)', /whatsappNumber = '55\d{10,11}'/.test(seo))
+check('whatsappUrl usa https://wa.me/<número> com encodeURIComponent', /https:\/\/wa\.me\/\$\{whatsappNumber\}\?text=\$\{encodeURIComponent\(/.test(seo))
+// wa.me só pode aparecer no seoConfig e no builder do funil (que também usa encodeURIComponent)
+const hardcoded = sources.filter((x) => !x.f.endsWith('seoConfig.ts') && !x.f.endsWith('funnelMessage.ts') && /wa\.me\//.test(x.s))
+check('nenhum link wa.me hardcoded fora do seoConfig/funnelMessage', hardcoded.length === 0)
+const funnelMsg = sources.find((x) => x.f.endsWith('funnelMessage.ts'))?.s ?? ''
+check('funnelMessage monta wa.me/<número>?text= com encodeURIComponent', /https:\/\/wa\.me\/\$\{phoneDigits\}\?text=\$\{encodeURIComponent\(/.test(funnelMsg))
 
 // 3. Alvos de toque >= 48px: botões/links mobile críticos declaram min-h-[48px]
 const touch = [
@@ -51,8 +55,10 @@ for (const [file, min] of touch) {
 }
 
 // 4. Formulários: se existirem, precisam sanitizar entrada
-const hasForm = sources.some((x) => /<form\b|<input\b|<textarea\b/.test(x.s))
-check('sem formulário não sanitizado (nenhum <form>/<input> no código, ou usa sanitizeInput)', !hasForm || sources.some((x) => /sanitizeInput/.test(x.s) && !x.f.includes('utils')))
+const formFiles = sources.filter((x) => /<form\b|<input\b|<textarea\b/.test(x.s))
+// buildFunnelMessage/buildBriefingText sanitizam tudo com cleanFreeText antes de montar a mensagem
+const unsanitized = formFiles.filter((x) => !/cleanFreeText|sanitizeInput|buildFunnelMessage|buildBriefingText|buildAjustesPayload/.test(x.s))
+check('todo arquivo com <input>/<textarea> sanitiza a entrada (cleanFreeText/buildFunnelMessage/buildBriefingText)', unsanitized.length === 0, unsanitized.map((x) => x.f).join(', '))
 
 // 5. 404 customizada branded, renderizada no build
 check('src/app/not-found.tsx existe', fs.existsSync(path.join(root, 'src/app/not-found.tsx')))
